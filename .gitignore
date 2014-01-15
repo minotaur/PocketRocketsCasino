@@ -244,6 +244,7 @@ web/content/img
 web/content/less
 web/content/sound
 web/content/themes
+web/themes/standard/img
 *.cs
 *.asax
 *.config
@@ -251,7 +252,7 @@ web/emotions-fb
 *.ico
 web/js
 packages
-*.png
+
 *.jpg
 web/themes/img
 
