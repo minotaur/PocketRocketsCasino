@@ -1,4 +1,4 @@
-PocketRocketsCasino
+Pocket Rockets Casino
 ===================
 
 I decided to open source the client side Javascript code to allow users to help fix some of the smaller non 
