@@ -240,7 +240,10 @@ web/dto
 web/controllers
 web/areas
 web/app_start
-web/content
+web/content/img
+web/content/less
+web/content/sound
+web/content/themes
 *.cs
 *.asax
 *.config
@@ -250,6 +253,6 @@ web/js
 packages
 *.png
 *.jpg
-web/themes
+web/themes/img
 
 web/scripts
