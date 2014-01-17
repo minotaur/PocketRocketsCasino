@@ -19,3 +19,5 @@ Feel free to submit own issues you may find while playing or reading the code.
 
 All testing can be done on the play money tables without the need to deposit.
 
+To load the script files on the live site without them being minimised use this url
+https://pocketrocketscasino.com/play?debug=true
