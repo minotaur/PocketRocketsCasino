@@ -53,8 +53,6 @@
             });
 
             $.connection.hub.reconnected(function () {
-                console.log("reconnectd from client function");
-
                 self.reconnectAttempts = 0;
                 self.reconnectInterval = null;
                 $(".connectionLight").removeClass("btn-danger").removeClass("btn-warning").addClass("btn-success");
@@ -70,7 +68,6 @@
 
 
             $.connection.hub.disconnected(function () {
-                console.log("disconnectd from client function");
                 self.reconnectInterval = setInterval(function () {
                         self.reconnectAttempts++;
                         if (self.reconnectAttempts >= 4) {

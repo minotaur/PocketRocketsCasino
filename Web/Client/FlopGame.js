@@ -153,6 +153,8 @@ PR.FlopGame = function (id) {
 
             if (message.away === true || message.sitOut === true) {
                 self.domElement.find(".sitOutCheckBox").attr('checked', true);
+                self.domElement.find(".waitCheckBoxContainer").hide();
+                self.domElement.find(".foldCheckBoxContainer").hide();
             } else {
                 self.domElement.find(".sitOutCheckBox").attr('checked', false);
             }
@@ -240,9 +242,6 @@ PR.FlopGame = function (id) {
 
         if (self.mySeat != 0 && self.gameType != 4) {
             if (self.userIsCurrentAction === false) {
-
-                self.domElement.find(".foldCheckBox").attr("checked", false);
-                self.domElement.find(".callCheckBox").attr("checked", false);
                 self.controls.show();
                 self.controls.find(".row1").hide();
                 self.controls.find(".row2").hide();
@@ -260,7 +259,6 @@ PR.FlopGame = function (id) {
                 if (self.getSeatByNumber(self.mySeat).state === 4 && playerChips > 0) {
                     self.domElement.find(".autoActionButtons").show();
                     self.domElement.find(".waitCheckBoxContainer").show();
-                    self.domElement.find(".foldCheckBoxContainer").hide();
 
                     if (seats[self.mySeat - 1].waitForBB === false) {
                         self.domElement.find(".waitForBBCheckBox").attr('checked', false);
@@ -269,11 +267,12 @@ PR.FlopGame = function (id) {
                     }
                             
                 } else {
+                    self.domElement.find(".foldCheckBoxContainer").show();
                     if (self.getSeatByNumber(self.mySeat).state === 3) {
                         self.domElement.find(".autoActionButtons").hide();
+                        self.domElement.find(".foldCheckBoxContainer").hide();
                     }
 
-                    self.domElement.find(".foldCheckBoxContainer").show();
                 }
             }else {
                 self.controls.find(".row1").show();
