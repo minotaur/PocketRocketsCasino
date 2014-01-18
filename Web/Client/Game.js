@@ -870,7 +870,6 @@
                     self.controls.find(".row2").hide();
                     self.controls.find(".row3").hide();
                     self.domElement.find(".autoActionButtons").show();
-                    self.domElement.find(".waitCheckBoxContainer").hide();
 
                 }
             }

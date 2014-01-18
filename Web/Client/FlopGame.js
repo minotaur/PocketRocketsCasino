@@ -253,7 +253,6 @@ PR.FlopGame = function (id) {
                             
                     if (self.domElement.find('.seat' + self.correctSeatNumber(userSeatNumber) + ' .cards').hasClass("folded") === false) {
                         self.domElement.find(".autoActionButtons").show();
-                        self.domElement.find(".waitCheckBoxContainer").hide();
 
                     }
                 }
@@ -274,7 +273,6 @@ PR.FlopGame = function (id) {
                         self.domElement.find(".autoActionButtons").hide();
                     }
 
-                    self.domElement.find(".waitCheckBoxContainer").hide();
                     self.domElement.find(".foldCheckBoxContainer").show();
                 }
             }else {
