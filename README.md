@@ -21,3 +21,6 @@ All testing can be done on the play money tables without the need to deposit.
 
 To load the script files on the live site without them being minimised use this url
 https://pocketrocketscasino.com/play?debug=true
+
+If you choose to work on an item assign it to yourself so no one else tries to work on it.
+
