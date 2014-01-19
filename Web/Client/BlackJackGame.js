@@ -74,26 +74,25 @@
 
         self.placeBlackJackBets = function ()
         {
-            self.controls.show();
-            self.domElement.find(".row1").show();
-            self.domElement.find(".row2").show();
-            self.domElement.find(".row3").show();
-            self.domElement.find(".standButton").hide();
-            self.domElement.find(".hitButton").hide();
-            self.domElement.find(".doubleButton").hide();
-            self.domElement.find(".splitButton").hide();
-            self.domElement.find(".betButton").show();
-            var betAmount = self.minBet;
-            if (self.lastBet > 0) {
-                if(self.lastBet > self.playerChips)
-                {
-                    betAmount = self.playerChips;
-                }else
-                {
-                    betAmount = self.lastBet;
+            if (self.numberOfCardsDealt < 1) {
+                self.controls.show();
+                self.domElement.find(".row1").show();
+                self.domElement.find(".row2").show();
+                self.domElement.find(".row3").show();
+                self.domElement.find(".standButton").hide();
+                self.domElement.find(".hitButton").hide();
+                self.domElement.find(".doubleButton").hide();
+                self.domElement.find(".splitButton").hide();
+                self.domElement.find(".betButton").show();
+                var betAmount = self.minBet;
+                if (self.lastBet > 0) {
+                    if (self.lastBet > self.playerChips) {
+                        betAmount = self.playerChips;
+                    } else {
+                        betAmount = self.lastBet;
+                    }
                 }
             }
-            
 
             self.domElement.find(".sliderAmount").val(PR.Utils.formatCurrencySI(betAmount, self.currency));
 
