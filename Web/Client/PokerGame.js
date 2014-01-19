@@ -115,8 +115,6 @@
             self.domElement.find(".progress").hide();
             self.stopFlash();
             PR.Desktop.setActionOnNextGame(self.id);
-            self.domElement.find(".foldCheckBox").attr('checked', false);
-            self.domElement.find(".callCheckBox").attr('checked', false)
         };
 
         self.raiseAction = function () {
