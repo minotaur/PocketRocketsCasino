@@ -435,8 +435,6 @@
             }
            
             self.buyIn(amount);
-
-            buyInDialogue.hide();
         };
 
         self.update = function () {

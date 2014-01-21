@@ -374,8 +374,8 @@ header .navbar-fixed-top {
   margin: 0;
   left: 35%;
 }
-.buyInDialogue p,
-.buyInDialogue label {
+.buyInDialogue .modal-body p,
+.buyInDialogue .modal-body label {
   color: #000!important;
 }
 .buyInDialogue .otherAmountTextBox {
