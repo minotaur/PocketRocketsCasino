@@ -250,7 +250,7 @@ web/themes/standard/img
 *.config
 web/emotions-fb
 *.ico
-web/js
+web/js/libs/bootstrap
 packages
 
 *.jpg
