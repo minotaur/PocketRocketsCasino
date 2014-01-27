@@ -16,10 +16,12 @@
 
         Lobby.getActiveGames = function (firstLoad) {
             PR.PokerHub.server.getActiveGames().done(function (games) {
-                $("#browsePanel").hide();
                 $("#activeGamesList").empty();
-                $("#activeGamesPanel").show();
-                $(".noGamesWarning").hide();
+                if ($("#activeGamesPanel").is(":visible") || firstLoad) {
+                    $("#browsePanel").hide();
+                    $("#activeGamesPanel").show();
+                    $(".noGamesWarning").hide();
+                }
 
                 if (games.length > 0) {
                     var mappedGames = $.map(games, function (item) { return new PokerGame(item); });
