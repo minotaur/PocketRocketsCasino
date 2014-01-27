@@ -154,6 +154,7 @@
 
             self.domElement.find(".betButton").unbind("click").click(PR.Utils.debounce(function (e) {
                 var amount = parseFloat(self.domElement.find(".sliderAmount").val());
+                self.lastBet = amount;
                 PR.PokerHub.server.blackJackBet(self.id, amount);
                 self.controls.hide();
                 self.stopTimer();
