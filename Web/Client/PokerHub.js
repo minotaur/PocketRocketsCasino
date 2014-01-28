@@ -104,6 +104,9 @@
                 PR.PokerHub.server.getChat();
                 PR.Lobby.getActiveGames(true);
 
+                var tableId = window.location.search.replace("?table=", "").replace("&debug=true", "");;
+                PR.Desktop.openGame(parseInt(tableId), 0);
+
             });
         }());
 
@@ -285,8 +288,8 @@
             PR.Desktop.chat(gameId, message);
         };
         
-        PokerHub.client.lobbyChat = function (message) {
-            PR.Desktop.lobbyChat(message, false);
+        PokerHub.client.lobbyChat = function (message, time) {
+            PR.Desktop.lobbyChat(message, time, false);
         };
         
         PokerHub.client.loadChat = function (messages) {

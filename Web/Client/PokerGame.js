@@ -440,7 +440,6 @@
 
             self.slider.slider("destroy");
             self.slider.on('mousedown', self.sliderMouseDown)
-                    .on('touchstart', self.sliderMouseDown)
                     .slider({
                         range: "min",
                         value: minBet,

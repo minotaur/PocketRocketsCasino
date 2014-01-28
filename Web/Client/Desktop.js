@@ -344,7 +344,7 @@
 
         };
         
-        Desktop.lobbyChat = function (message, isLoad) {
+        Desktop.lobbyChat = function (message, time, isLoad) {
             if (Desktop.userName != null && message.toLowerCase().indexOf("@" + Desktop.userName.toLowerCase()) !== -1) {
                 message = message.replace("@" + Desktop.userName, "<span style='color:#20C71A'>@" + Desktop.userName + "</span>");
 
@@ -370,8 +370,8 @@
                     }
                 }
             }
-
-            $('#lobbyChatMessages').append('<li>' + message + '</li>');
+            var d = new Date(Date.parse(time.replace('-', '/').replace('-', '/') + ":00 +00:00"));
+            $('#lobbyChatMessages').append('<li><span style="color: #888;font-size: 10px;">' + moment(d).format('HH:mm') + ': </span>' + message + '</li>');
            
             if (!Desktop.isAndroid) {
                 $('#lobbyChatMessages').emotions();
@@ -383,8 +383,9 @@
         Desktop.selectedTournamentTable = 0;
 
         Desktop.loadChat = function (messages) {
+           
             for (var i = 0; i < messages.length; i++) {
-                Desktop.lobbyChat(messages[i], true);
+                Desktop.lobbyChat(messages[i].Item1, messages[i].Item2, true);
             }
             
         };

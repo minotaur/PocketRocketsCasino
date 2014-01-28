@@ -54,6 +54,28 @@
             return x;
         };
 
+        Utils.getCurrencySymbol = function (x, currency) {
+            var multiplier = 1;
+            if (currency === 1 || currency === 3)
+                multiplier = 0.001;
+
+            var prefix = d3.formatPrefix(multiplier);
+            var m = Math.round(prefix.scale(x) * 100) / 100;
+            var s = prefix.symbol;
+            if (currency === 1) {
+                s = s + '฿';
+            } else if (currency === 2) {
+                s = s + 'D';
+
+            } else if (currency === 3) {
+                s = s + 'L';
+
+            } else if (currency === 4) {
+                s = s + 'C';
+
+            }
+            return s;
+        };
 
         Utils.formatCurrency = function (x, currency) {
             var multiplier = 1;
@@ -89,6 +111,38 @@
             return s;
         };
 
+        Utils.formatCurrencyNoRounding = function (x, currency) {
+            var multiplier = 1;
+            if (currency === 1 || currency === 3)
+                multiplier = 0.001;
+
+            var prefix = d3.formatPrefix(multiplier);
+            //x = prefix.scale(x);
+            var m = Math.round(prefix.scale(x) * 1000000) / 1000000;
+            var s = m;
+            //if (m % 1 != 0) {
+              //  s = m;//.toFixed(2);
+            //}
+            //else {
+              //  s = m
+            //}
+
+            s = s + ' ' + prefix.symbol;
+
+            if (currency === 1) {
+                s = s + '฿';
+            } else if (currency === 2) {
+                s = s + 'D';
+
+            } else if (currency === 3) {
+                s = s + 'L';
+
+            } else if (currency === 4) {
+                s = s + 'C';
+
+            }
+            return s;
+        };
 
 
         Utils.formatCurrencySI = function (x, currency) {
