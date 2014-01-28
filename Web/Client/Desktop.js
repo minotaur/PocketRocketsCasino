@@ -92,10 +92,10 @@
 
             $('#pokerButton').click(function () {
                 if ($("#pokerLobby").is(":visible") && $('#pokerButton').hasClass("btn-inverse")) {
-                    $("#pokerLobby").hide("slide", { direction: "left" }, 100);
+                    $("#pokerLobby").hide();
                 } else {
                     if (!$("#pokerLobby").is(":visible")) {
-                        $("#pokerLobby").show("slide", { direction: "left" }, 100);
+                        $("#pokerLobby").show();
                     }
                 }
                 PR.Lobby.setGameType(0);
@@ -115,10 +115,10 @@
 
             $('#casinoButton').click(function () {
                 if ($("#pokerLobby").is(":visible") && $('#casinoButton').hasClass("btn-inverse")) {
-                    $("#pokerLobby").hide("slide", { direction: "left" }, 100);
+                    $("#pokerLobby").hide();
                 } else {
                     if (!$("#pokerLobby").is(":visible")) {
-                        $("#pokerLobby").show("slide", { direction: "left" }, 100);
+                        $("#pokerLobby").show();
                         $("#pokerLobby").css("z-index", ++Desktop.zIndex);
                     }
                 }
@@ -153,7 +153,7 @@
             });
 
             $('#chatDisplayButton').unbind("click").click(function () {
-                $("#chatRoom").toggle("slide", { direction: "left" }, 100);
+                $("#chatRoom").toggle();
                 if (!$('#chatDisplayButton').hasClass("btn-inverse")) {
                     $('#chatRoom').css("z-index", ++Desktop.zIndex);
                     window.setTimeout(function () {
@@ -183,6 +183,18 @@
             });
             
             $(".draggablePanel").draggable();
+
+            $('#pokerLobby,#chatRoom').draggable({ containment: "parent", handle: windowTitleBarSelector, snap: true, stack: windowSelector }).css("z-index", ++Desktop.zIndex);
+            $('#chatRoom').resizable({
+                containment: "parent",
+                snap: true,
+                minHeight: 300,
+                minWidth: 360,
+                handles: "se",
+                resize: function(event,ui){
+                    $('#lobbyChatMessages').css("height",($(this).height()-227)+"px");
+                }
+            });
 
             $("#lastHandDialogue").draggable({
                 handle: '.modal-header, .lastHandText, .modal-footer',
