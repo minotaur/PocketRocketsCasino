@@ -104,8 +104,10 @@
                 PR.PokerHub.server.getChat();
                 PR.Lobby.getActiveGames(true);
 
-                var tableId = window.location.search.replace("?table=", "").replace("&debug=true", "");;
-                PR.Desktop.openGame(parseInt(tableId), 0);
+                var tableId = window.location.search.replace("?table=", "").replace("&debug=true", "");
+                if (tableId !== "") {
+                    PR.Desktop.openGame(parseInt(tableId), 0);
+                }
 
             });
         }());
@@ -405,7 +407,7 @@
 
         };
 
-        PokerHub.client.updateBJGameState = function (gameId, seats, dealerButtonPosition, seatsWithPlayers,
+        PokerHub.client.updateBJGameState = function (gameId, maxBet, seats, dealerButtonPosition, seatsWithPlayers,
                                         seatWithCurrentAction, userSeated, userSeatNumber, userIsCurrentAction,
                                         gameState, sitOut, playerChips,
                                         timerStarted, timer,
@@ -415,6 +417,7 @@
                                         dealerScore, playerScore, playerScore2) {
             var message = {
                 seats: seats,
+                maxBet: maxBet,
                 dealerButtonPosition: dealerButtonPosition,
                 seatsWithPlayers: seatsWithPlayers,
                 seatWithCurrentAction: seatWithCurrentAction,
