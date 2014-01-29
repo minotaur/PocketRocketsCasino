@@ -130,7 +130,6 @@
 
                $(this).toggleClass("btn-inverse");
                $('#pokerButton').removeClass("btn-inverse");
-
                 });
 
             $('#pokerLobby').unbind("click").click(function () {
@@ -173,18 +172,18 @@
             
             $(".draggablePanel").draggable();
 
-            $('#pokerLobby,#chatRoom').draggable({ containment: "parent", cancel:"#chatSubmitButton,#lobbyChatInput,#playersOnline,#lobbyChatMessages", handle: windowTitleBarSelector, snap: true, stack: windowSelector }).css("z-index", ++Desktop.zIndex);
+            $('#pokerLobby').draggable({ containment: "parent", cancel: "#pokerFilterTables,#currencyOptions", handle: windowTitleBarSelector, snap: true, stack: windowSelector }).css("z-index", ++Desktop.zIndex);
+            $('#chatRoom').draggable({ containment: "parent", cancel: "#chatSubmitButton,#lobbyChatInput,#playersOnline,#lobbyChatMessages", handle: windowTitleBarSelector, snap: true, stack: windowSelector }).css("z-index", ++Desktop.zIndex);
             $('#chatRoom').resizable({
-                containment: "parent",
-                snap: true,
-                minHeight: 300,
-                minWidth: 360,
-                handles: "se",
-                resize: function(event,ui){
-                    $('#lobbyChatMessages').css("height",($(this).height()-227)+"px");
-                }
-            });
-
+                            containment: "parent",
+                            snap: true,
+                            minHeight: 300,
+                            minWidth: 360,
+                            handles: "se",
+                            resize: function(event,ui){
+                                $('#lobbyChatMessages').css("height",($(this).height()-227)+"px");
+                            }
+                    });
             $("#lastHandDialogue").draggable({
                 handle: '.modal-header, .lastHandText, .modal-footer',
             });
@@ -772,15 +771,9 @@
 
                         $(".minWindow-" + id).appendTo("#taskBar");
 
-                        //if (tile) {
                         $("#tileTables").trigger("click");
-                        //}
 
                         $(".draggablePanel").draggable();
-                        $('#chatDisplayButton').removeClass('btn-inverse');
-                        $("#chatRoom").hide();
-                        $("#pokerLobby").hide();
-                        $('#pokerButton').removeClass('btn-inverse');
                     }
                 });
 
