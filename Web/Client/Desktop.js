@@ -105,11 +105,8 @@
                 $("#mainPokerType").show();
                 $("#pokerFilters").show();
                 $("#pokerFilterTables").css("margin-top", 108 + "px");
-                $('#chatDisplayButton').removeClass("btn-inverse");
                 $('#casinoButton').removeClass("btn-inverse");
-                $("#chatRoom").hide();
                 $("#pokerLobby").css("z-index", ++Desktop.zIndex);
-                //$("#casinoLobby").hide();
 
             });
 
@@ -131,12 +128,8 @@
                 $("#pokerFilters").hide();
                 $("#pokerFilterTables").css("margin-top", 0 + "px");
 
-                //$("#casinoLobby").toggle("slide", { direction: "left" }, 100);
                $(this).toggleClass("btn-inverse");
                $('#pokerButton').removeClass("btn-inverse");
-               $('#chatDisplayButton').removeClass("btn-inverse");
-               $("#chatRoom").hide();
-               //$("#pokerLobby").hide();
 
                 });
 
@@ -162,10 +155,6 @@
                     }, 300);
                 }
                 $(this).toggleClass("btn-inverse")
-                $('#pokerButton').removeClass("btn-inverse");
-                $('#casinoButton').removeClass("btn-inverse");
-               // $("#casinoLobby").hide();
-                $("#pokerLobby").hide();
             });
 
             
@@ -184,7 +173,7 @@
             
             $(".draggablePanel").draggable();
 
-            $('#pokerLobby,#chatRoom').draggable({ containment: "parent", handle: windowTitleBarSelector, snap: true, stack: windowSelector }).css("z-index", ++Desktop.zIndex);
+            $('#pokerLobby,#chatRoom').draggable({ containment: "parent", cancel:"#chatSubmitButton,#lobbyChatInput,#playersOnline,#lobbyChatMessages", handle: windowTitleBarSelector, snap: true, stack: windowSelector }).css("z-index", ++Desktop.zIndex);
             $('#chatRoom').resizable({
                 containment: "parent",
                 snap: true,
