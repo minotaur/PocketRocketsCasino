@@ -700,18 +700,20 @@
 
         self.showTournamentStartMesage = function () {
             setTimeout(function () {
+                var scrollChat = false;
+                var scrollChatPopout = false;
+                if($('.chatMessages' + self.id).scrollTop() + $('.chatMessages' + self.id).innerHeight() >= $('.chatMessages' + self.id)[0].scrollHeight) {
+                    scrollChat = true;
+                }
+                if($('.popoutMessages' + self.id).scrollTop() + $('.popoutMessages' + self.id).innerHeight() >= $('.popoutMessages' + self.id)[0].scrollHeight) {
+                    scrollChatPopout = true;
+                }
                 $('.chatMessages' + self.id).append("Tournament starting in 1 minute");
-                $('.chatMessages' + self.id).prop({ scrollTop: $('.chatMessages' + self.id).prop('scrollHeight') });
-                $('.popoutMessages' + self.id).prop({ scrollTop: $('.popoutMessages' + self.id).prop('scrollHeight') });
-            }, 1000);
-
-
-            
+                if (scrollChat) $('.chatMessages' + self.id).prop({ scrollTop: $('.chatMessages' + self.id).prop('scrollHeight') });
+                if (scrollChatPopout) $('.popoutMessages' + self.id).prop({ scrollTop: $('.popoutMessages' + self.id).prop('scrollHeight') });
+            }, 1000);            
         };
 
-
-        
-       
         self.waitForTime = function (message) {
             self.wait = true;
 

@@ -391,9 +391,17 @@
                     result = result + ' with ' + message.description;
                 }
                 result = result + '</li>';
+                var scrollChat = false;
+                var scrollChatPopout = false;
+                if($('.chatMessages' + self.id).scrollTop() + $('.chatMessages' + self.id).innerHeight() >= $('.chatMessages' + self.id)[0].scrollHeight) {
+                    scrollChat = true;
+                }
+                if($('.popoutMessages' + self.id).scrollTop() + $('.popoutMessages' + self.id).innerHeight() >= $('.popoutMessages' + self.id)[0].scrollHeight) {
+                    scrollChatPopout = true;
+                }
                 $('.chatMessages' + self.id).append(result);
-                $('.chatMessages' + self.id).prop({ scrollTop: $('.chatMessages' + self.id).prop('scrollHeight') });
-                $('.popoutMessages' + self.id).prop({ scrollTop: $('.popoutMessages' + self.id).prop('scrollHeight') });
+                if (scrollChat) $('.chatMessages' + self.id).prop({ scrollTop: $('.chatMessages' + self.id).prop('scrollHeight') });
+                if (scrollChatPopout) $('.popoutMessages' + self.id).prop({ scrollTop: $('.popoutMessages' + self.id).prop('scrollHeight') });
 
                 self.createChipStack(message.potAmount, self.id, self.correctSeatNumber(message.seatNumber), 'bet');
                 self.domElement.find('.seat' + self.correctSeatNumber(message.seatNumber) + ' .bet').show();

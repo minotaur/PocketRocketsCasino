@@ -325,10 +325,17 @@
 
         
         Desktop.gameStarting = function (gameId) {
+            var scrollChat = false;
+            var scrollChatPopout = false;
+            if($('.chatMessages' + gameId).scrollTop() + $('.chatMessages' + gameId).innerHeight() >= $('.chatMessages' + gameId)[0].scrollHeight) {
+                scrollChat = true;
+            }
+            if($('.popoutMessages' + gameId).scrollTop() + $('.popoutMessages' + gameId).innerHeight() >= $('.popoutMessages' + gameId)[0].scrollHeight) {
+                scrollChatPopout = true;
+            }
             $('.chatMessages' + gameId).append('<li>Game starting in 20 seconds</li>');
-            $('.chatMessages' + gameId).prop({ scrollTop: $('.chatMessages' + gameId).prop('scrollHeight') });
-            $('.popoutMessages' + gameId).prop({ scrollTop: $('.popoutMessages' + gameId).prop('scrollHeight') });
-
+            if (scrollChat) $('.chatMessages' + gameId).prop({ scrollTop: $('.chatMessages' + gameId).prop('scrollHeight') });
+            if (scrollChatPopout) $('.popoutMessages' + gameId).prop({ scrollTop: $('.popoutMessages' + gameId).prop('scrollHeight') });
         };
 
         Desktop.chat = function (gameId, message) {
@@ -337,10 +344,17 @@
                 colour = "d10506";
             }
 
+            var scrollChat = false;
+            var scrollChatPopout = false;
+            if($('.chatMessages' + gameId).scrollTop() + $('.chatMessages' + gameId).innerHeight() >= $('.chatMessages' + gameId)[0].scrollHeight) {
+                scrollChat = true;
+            }
+            if($('.popoutMessages' + gameId).scrollTop() + $('.popoutMessages' + gameId).innerHeight() >= $('.popoutMessages' + gameId)[0].scrollHeight) {
+                scrollChatPopout = true;
+            }
             $('.chatMessages' + gameId).append('<li  style="color:#' + colour + '">' + message + '</li>');
-            $('.chatMessages' + gameId).prop({ scrollTop: $('.chatMessages' + gameId).prop('scrollHeight') });
-            $('.popoutMessages' + gameId).prop({ scrollTop: $('.popoutMessages' + gameId).prop('scrollHeight') });
-
+            if (scrollChat) $('.chatMessages' + gameId).prop({ scrollTop: $('.chatMessages' + gameId).prop('scrollHeight') });
+            if (scrollChatPopout) $('.popoutMessages' + gameId).prop({ scrollTop: $('.popoutMessages' + gameId).prop('scrollHeight') });
         };
         
         Desktop.lobbyChat = function (message, time, isLoad) {
@@ -369,6 +383,10 @@
                     }
                 }
             }
+            var scrollChat = false;
+            if($('#lobbyChatMessages').scrollTop() + $('#lobbyChatMessages').innerHeight() >= $('#lobbyChatMessages')[0].scrollHeight) {
+                scrollChat = true;
+            }
             var d = new Date(Date.parse(time.replace('-', '/').replace('-', '/') + ":00 +00:00"));
             $('#lobbyChatMessages').append('<li><span style="color: #888;font-size: 10px;">' + moment(d).format('HH:mm') + ': </span>' + message + '</li>');
            
@@ -376,7 +394,7 @@
                 $('#lobbyChatMessages').emotions();
             }
 
-            $('#lobbyChatMessages').prop({ scrollTop: $('#lobbyChatMessages').prop('scrollHeight') });
+            if(scrollChat) $('#lobbyChatMessages').prop({ scrollTop: $('#lobbyChatMessages').prop('scrollHeight') });
         };
 
         Desktop.selectedTournamentTable = 0;
