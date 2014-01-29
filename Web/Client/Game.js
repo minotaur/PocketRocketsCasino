@@ -702,14 +702,14 @@
             setTimeout(function () {
                 var scrollChat = false;
                 var scrollChatPopout = false;
-                if($('.chatMessages' + self.id).scrollTop() + $('.chatMessages' + self.id).innerHeight() >= $('.chatMessages' + self.id)[0].scrollHeight) {
+                if($('.chatMessagesContainer .chatMessages' + self.id).scrollTop() + $('.chatMessagesContainer .chatMessages' + self.id).innerHeight() + 2 >= $('.chatMessagesContainer .chatMessages' + self.id)[0].scrollHeight) {
                     scrollChat = true;
                 }
                 if($('.popoutMessages' + self.id).scrollTop() + $('.popoutMessages' + self.id).innerHeight() >= $('.popoutMessages' + self.id)[0].scrollHeight) {
                     scrollChatPopout = true;
                 }
                 $('.chatMessages' + self.id).append("Tournament starting in 1 minute");
-                if (scrollChat) $('.chatMessages' + self.id).prop({ scrollTop: $('.chatMessages' + self.id).prop('scrollHeight') });
+                if (scrollChat) $('.chatMessagesContainer .chatMessages' + self.id).prop({ scrollTop: $('.chatMessagesContainer .chatMessages' + self.id).prop('scrollHeight') });
                 if (scrollChatPopout) $('.popoutMessages' + self.id).prop({ scrollTop: $('.popoutMessages' + self.id).prop('scrollHeight') });
             }, 1000);            
         };

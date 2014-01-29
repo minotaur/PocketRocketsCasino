@@ -327,14 +327,14 @@
         Desktop.gameStarting = function (gameId) {
             var scrollChat = false;
             var scrollChatPopout = false;
-            if($('.chatMessages' + gameId).scrollTop() + $('.chatMessages' + gameId).innerHeight() >= $('.chatMessages' + gameId)[0].scrollHeight) {
+            if($('.chatMessagesContainer .chatMessages' + gameId).scrollTop() + $('.chatMessagesContainer .chatMessages' + gameId).innerHeight() + 2 >= $('.chatMessagesContainer .chatMessages' + gameId)[0].scrollHeight) {
                 scrollChat = true;
             }
             if($('.popoutMessages' + gameId).scrollTop() + $('.popoutMessages' + gameId).innerHeight() >= $('.popoutMessages' + gameId)[0].scrollHeight) {
                 scrollChatPopout = true;
             }
             $('.chatMessages' + gameId).append('<li>Game starting in 20 seconds</li>');
-            if (scrollChat) $('.chatMessages' + gameId).prop({ scrollTop: $('.chatMessages' + gameId).prop('scrollHeight') });
+            if (scrollChat) $('.chatMessagesContainer .chatMessages' + gameId).prop({ scrollTop: $('.chatMessagesContainer .chatMessages' + gameId).prop('scrollHeight') });
             if (scrollChatPopout) $('.popoutMessages' + gameId).prop({ scrollTop: $('.popoutMessages' + gameId).prop('scrollHeight') });
         };
 
@@ -346,14 +346,14 @@
 
             var scrollChat = false;
             var scrollChatPopout = false;
-            if($('.chatMessages' + gameId).scrollTop() + $('.chatMessages' + gameId).innerHeight() >= $('.chatMessages' + gameId)[0].scrollHeight) {
+            if($('.chatMessagesContainer .chatMessages' + gameId).scrollTop() + $('.chatMessagesContainer .chatMessages' + gameId).innerHeight() + 2 >= $('.chatMessagesContainer .chatMessages' + gameId)[0].scrollHeight) {
                 scrollChat = true;
             }
             if($('.popoutMessages' + gameId).scrollTop() + $('.popoutMessages' + gameId).innerHeight() >= $('.popoutMessages' + gameId)[0].scrollHeight) {
                 scrollChatPopout = true;
             }
-            $('.chatMessages' + gameId).append('<li  style="color:#' + colour + '">' + message + '</li>');
-            if (scrollChat) $('.chatMessages' + gameId).prop({ scrollTop: $('.chatMessages' + gameId).prop('scrollHeight') });
+            $('.chatMessages' + gameId).append('<li style="color:#' + colour + '">' + message + '</li>');
+            if (scrollChat) $('.chatMessagesContainer .chatMessages' + gameId).prop({ scrollTop: $('.chatMessagesContainer .chatMessages' + gameId).prop('scrollHeight') });
             if (scrollChatPopout) $('.popoutMessages' + gameId).prop({ scrollTop: $('.popoutMessages' + gameId).prop('scrollHeight') });
         };
         
