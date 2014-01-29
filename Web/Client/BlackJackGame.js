@@ -154,7 +154,28 @@
 
             self.domElement.find(".betButton").unbind("click").click(PR.Utils.debounce(function (e) {
                 var amount = parseFloat(self.domElement.find(".sliderAmount").val());
+                if (self.currency === 1 || self.currency === 3) {
+                    amount = amount / 1000;
+                }
+
+                var amountRounded = parseFloat(PR.Utils.formatCurrencySI(amount, self.currency)/1000);
+                if (amountRounded > parseFloat(PR.Utils.formatCurrencySI(self.maxBet, self.currency) / 1000))
+                {
+                    PR.Desktop.showErrorMessageTimeout("Bet amount must be less than max bet");
+                    return;
+                }
+
+                if (amountRounded < parseFloat(PR.Utils.formatCurrencySI(self.minBet, self.currency) / 1000)) {
+                    PR.Desktop.showErrorMessageTimeout("Bet amount must be more than min bet");
+                    return;
+                }
                 self.lastBet = amount;
+
+                if (self.currency === 1 || self.currency === 3) {
+                    amount = amount * 1000;
+                }
+
+
                 PR.PokerHub.server.blackJackBet(self.id, amount);
                 self.controls.hide();
                 self.stopTimer();
@@ -229,9 +250,9 @@
                 var playersInGame = 0;
                 var gameState = message.gameState;
                 self.numberOfCardsDealt = message.numberOfCardsDealt;
-
                 self.mySeat = userSeatNumber;
-                
+                self.maxBet = message.maxBet;
+                self.domElement.find(".maxBetAmount").text(PR.Utils.formatCurrency(self.maxBet, self.currency));
                 var fullSeats = 0;
 
                 var i;
