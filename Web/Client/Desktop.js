@@ -92,10 +92,10 @@
 
             $('#pokerButton').click(function () {
                 if ($("#pokerLobby").is(":visible") && $('#pokerButton').hasClass("btn-inverse")) {
-                    $("#pokerLobby").hide("slide", { direction: "left" }, 100);
+                    $("#pokerLobby").hide();
                 } else {
                     if (!$("#pokerLobby").is(":visible")) {
-                        $("#pokerLobby").show("slide", { direction: "left" }, 100);
+                        $("#pokerLobby").show();
                     }
                 }
                 PR.Lobby.setGameType(0);
@@ -105,20 +105,17 @@
                 $("#mainPokerType").show();
                 $("#pokerFilters").show();
                 $("#pokerFilterTables").css("margin-top", 108 + "px");
-                $('#chatDisplayButton').removeClass("btn-inverse");
                 $('#casinoButton').removeClass("btn-inverse");
-                $("#chatRoom").hide();
                 $("#pokerLobby").css("z-index", ++Desktop.zIndex);
-                //$("#casinoLobby").hide();
 
             });
 
             $('#casinoButton').click(function () {
                 if ($("#pokerLobby").is(":visible") && $('#casinoButton').hasClass("btn-inverse")) {
-                    $("#pokerLobby").hide("slide", { direction: "left" }, 100);
+                    $("#pokerLobby").hide();
                 } else {
                     if (!$("#pokerLobby").is(":visible")) {
-                        $("#pokerLobby").show("slide", { direction: "left" }, 100);
+                        $("#pokerLobby").show();
                         $("#pokerLobby").css("z-index", ++Desktop.zIndex);
                     }
                 }
@@ -131,12 +128,8 @@
                 $("#pokerFilters").hide();
                 $("#pokerFilterTables").css("margin-top", 0 + "px");
 
-                //$("#casinoLobby").toggle("slide", { direction: "left" }, 100);
                $(this).toggleClass("btn-inverse");
                $('#pokerButton').removeClass("btn-inverse");
-               $('#chatDisplayButton').removeClass("btn-inverse");
-               $("#chatRoom").hide();
-               //$("#pokerLobby").hide();
 
                 });
 
@@ -153,7 +146,7 @@
             });
 
             $('#chatDisplayButton').unbind("click").click(function () {
-                $("#chatRoom").toggle("slide", { direction: "left" }, 100);
+                $("#chatRoom").toggle();
                 if (!$('#chatDisplayButton').hasClass("btn-inverse")) {
                     $('#chatRoom').css("z-index", ++Desktop.zIndex);
                     window.setTimeout(function () {
@@ -162,10 +155,6 @@
                     }, 300);
                 }
                 $(this).toggleClass("btn-inverse")
-                $('#pokerButton').removeClass("btn-inverse");
-                $('#casinoButton').removeClass("btn-inverse");
-               // $("#casinoLobby").hide();
-                $("#pokerLobby").hide();
             });
 
             
@@ -183,6 +172,18 @@
             });
             
             $(".draggablePanel").draggable();
+
+            $('#pokerLobby,#chatRoom').draggable({ containment: "parent", cancel:"#chatSubmitButton,#lobbyChatInput,#playersOnline,#lobbyChatMessages", handle: windowTitleBarSelector, snap: true, stack: windowSelector }).css("z-index", ++Desktop.zIndex);
+            $('#chatRoom').resizable({
+                containment: "parent",
+                snap: true,
+                minHeight: 300,
+                minWidth: 360,
+                handles: "se",
+                resize: function(event,ui){
+                    $('#lobbyChatMessages').css("height",($(this).height()-227)+"px");
+                }
+            });
 
             $("#lastHandDialogue").draggable({
                 handle: '.modal-header, .lastHandText, .modal-footer',
