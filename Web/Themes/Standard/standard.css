@@ -1157,6 +1157,11 @@ top:31%;
   left: 53%;
 }
 
+.theme-standard .workSpace .table-doge {
+  background: no-repeat url('/themes/standard/img/table_felt_doge.png');
+  background-size: 100% auto;
+}
+
 .theme-standard .workSpace .black-black {
   background: no-repeat url('/themes/standard/img/table_black_black.png');
   background-size: 100% auto;

@@ -1068,6 +1068,12 @@
         self.closeOfcScoresDialogue = function () {
             self.domElement.find('.ofcScoresDialogue').hide();
         };
+
+        self.closeBlackjackRulesDialogue = function () {
+            self.domElement.find('.blackjackRulesDialogue').hide();
+        };
+
+        
         self.BindCloseButtons = function () {
             $('.tableCloseButton-' + self.id).unbind("click").click(function () {
                 self.closeButtonClick();
@@ -1129,6 +1135,10 @@
 
         self.ofcScoreButtonClick = function () {
             self.domElement.find('.ofcScoresDialogue').show();
+        };
+
+        self.blackjackRulesButtonClick = function () {
+            self.domElement.find('.blackjackRulesDialogue').show();
         };
 
         self.BindSitOutButton = function () {

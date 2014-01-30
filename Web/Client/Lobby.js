@@ -70,7 +70,7 @@
                 //Lobby.bindOpenTable();
                 
                 Lobby.bindHighlight();
-                Lobby.setupSortTable();
+                //Lobby.setupSortTable();
                // $(".startDateColumn").trigger("click");
                 Lobby.filterTable();
 
@@ -80,9 +80,9 @@
         Lobby.updateLobby = function () {
             $("#openTableButton").hide();
 
-            vm.games.removeAll();
+            //vm.games.removeAll();
 
-            $('#pokerFilterTables .table').find('tbody').empty();
+            //$('#pokerFilterTables .table').find('tbody').empty();
             if (vm.gameStructure() === 2) {
                 Lobby.loadTournaments(false);
 
@@ -102,7 +102,7 @@
                             vm.games(mappedGames);
                             //Lobby.bindOpenTable();
                             Lobby.bindHighlight();
-                            Lobby.setupSortTable();
+                           // Lobby.setupSortTable();
 
                         });
                 } else if (vm.gameType() === 3) {
@@ -112,7 +112,7 @@
                             vm.casinoGames(mappedGames);
                             //Lobby.bindOpenTable();
                             Lobby.bindHighlight();
-                            Lobby.setupSortTable();
+                    //        Lobby.setupSortTable();
 
                         });
                 } else {
@@ -128,7 +128,7 @@
                             vm.games(mappedGames);
                             //Lobby.bindOpenTable();
                             Lobby.bindHighlight();
-                            Lobby.setupSortTable();
+                            //Lobby.setupSortTable();
                         });
                 }
             }
