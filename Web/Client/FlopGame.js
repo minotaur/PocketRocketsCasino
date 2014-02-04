@@ -130,7 +130,7 @@ PR.FlopGame = function (id) {
                     cardsElement.show();
 
                     for (var k = 0; k < playerCards.length; k++) {
-                        cardsElement.find(".card" + (k + 1)).removeClass().addClass('card card' + (k + 1) + ' card-' + playerCards[k]).show();
+                        cardsElement.find(".card" + (k + 1)).removeClass().addClass('card card' + (k + 1) + ' ' + PR.Utils.cardClass(playerCards[k], self.deck, self.fourColour, self.doge)).show();
                         if (k === playerCards.length - 1) {
                             cardsElement.find(".card" + (k + 1)).addClass('mainCard');
                         }
@@ -190,7 +190,7 @@ PR.FlopGame = function (id) {
             cardsElement.show();
 
             for (i = 0; i < communityCards.length; i++) {
-                cardsElement.find(".card" + (i + 1)).removeClass().addClass('card card' + (i + 1) + ' card-' + communityCards[i].card).css("visibility", "visible");
+                cardsElement.find(".card" + (i + 1)).removeClass().addClass('card card' + (i + 1) + ' ' + PR.Utils.cardClass(communityCards[i].card, self.deck, self.fourColour, self.doge)).css("visibility", "visible");
             }
         }
 

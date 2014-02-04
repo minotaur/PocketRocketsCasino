@@ -16,7 +16,9 @@
         self.seatRotations = 0;
         self.wait = false;
         self.tournamentId = 0;
-
+        self.deck = 'jumbo';
+        self.fourColour = true;
+        self.doge = false;
         self.typingTimer = 0;
         self.doneTypingInterval = 1200;
 
@@ -94,11 +96,24 @@
 
         self.contextState = ko.observable(self.contextStates.joinTable);
 
+        self.setDeck = function (deck, fourColour, doge) {
+            self.deck = deck;
+            self.fourColour = fourColour;
+            self.doge = doge;
+
+            if (self.gameType === 3 && deck === 'jumbo')
+            {
+                self.deck = 'trad';
+            }
+        };
+
         self.init = function (viewModel) {
             self.maxSeats = viewModel.SeatCount;
             self.currency = viewModel.Currency;
 
             self.gameType = viewModel.GameType;
+
+            
             self.tournamentId = viewModel.TournamentId;
             self.gameLimit = viewModel.Limit;
 

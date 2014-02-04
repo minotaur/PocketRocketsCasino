@@ -7,6 +7,37 @@
         Utils.street = { preFlop: 0, flop: 1, turn: 2, river: 3};
 
 
+        function endsWith(str, suffix) {
+            return str.indexOf(suffix, str.length - suffix.length) !== -1;
+        }
+
+        Utils.cardClass = function(card, deck, fourColour, doge)
+        {
+            if (card === undefined)
+                return;
+            if (card.indexOf('cardBack') > -1)
+                return card;
+
+            var s = 'card-';
+            if(deck !== '')
+            {
+                s = s + deck + '-';
+            }
+            s += card.replace('card-','');
+            if(fourColour === true && deck !== '')
+            {
+                if (endsWith(card, 'd') || endsWith(card, 'c')) {
+                    s += '4';
+                }
+            }
+            if(doge === true && (card.indexOf('j') > -1|| card.indexOf('q') > -1 || card.indexOf('k') > -1))
+            {
+                s += 'd';
+            }
+            return s;
+        }
+
+
         Utils.wrapFunction = function (fn, context, params) {
             return function () {
                 fn.apply(context, params);

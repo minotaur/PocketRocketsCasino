@@ -188,13 +188,13 @@
                 self.domElement.find(".playerScore2").text(msg.score).show();
 
                 var cardsElement = self.domElement.find('.playerCards2');
-                cardsElement.append('<div class="card card' + msg.cardNumber + ' card-' + msg.card + '"></div>');
+                cardsElement.append('<div class="card card' + msg.cardNumber + ' ' + PR.Utils.cardClass(msg.card, self.deck, self.fourColour, self.doge) + '"></div>');
             }else 
             {
                 self.domElement.find(".playerScore").text(msg.score).show();
 
                 var cardsElement = self.domElement.find('.playerCards');
-                cardsElement.append('<div class="card card' + msg.cardNumber + ' card-' + msg.card + '"></div>');
+                cardsElement.append('<div class="card card' + msg.cardNumber + ' ' + PR.Utils.cardClass(msg.card, self.deck, self.fourColour, self.doge) + '"></div>');
             }
         };
 
@@ -203,7 +203,7 @@
 
                 var cardsElement = self.domElement.find('.dealerCards');
                 cardsElement.find(".cardBack").remove();
-                cardsElement.append('<div class="card card' + msg.cardNumber + ' card-' + msg.card + '"></div>');
+                cardsElement.append('<div class="card card' + msg.cardNumber + ' ' + PR.Utils.cardClass(msg.card, self.deck, self.fourColour, self.doge) + '"></div>');
             }, 400 * msg.cardNumber);
         };
 
@@ -344,7 +344,7 @@
                     var cardsElement = self.domElement.find('.playerCards');
                     cardsElement.empty();
                     for (var k = 0; k < playerCards.length; k++) {
-                        cardsElement.append('<div class="card card' + (k + 1) + ' card-' + playerCards[k].card + '"></div>');
+                        cardsElement.append('<div class="card card' + (k + 1) + ' ' + PR.Utils.cardClass(playerCards[k].card, self.deck, self.fourColour, self.doge) + '"></div>');
                     }
 
                     if (self.numberOfCardsDealt === 4)
@@ -369,7 +369,7 @@
                     cardsElement.empty();
                     cardsElement.show();
                     for (var k = 0; k < playerCards2.length; k++) {
-                        cardsElement.append('<div class="card card' + (k + 1) + ' card-' + playerCards2[k].card + '"></div>');
+                        cardsElement.append('<div class="card card' + (k + 1) + ' ' + PR.Utils.cardClass(playerCards2[k].card, self.deck, self.fourColour, self.doge) + '"></div>');
                     }
                     self.domElement.find('.playerCards').css({ left: '42%' });
                     self.domElement.find('.playerResult').css({ left: '70%' });
@@ -405,7 +405,7 @@
                     cardsElement.empty();
                     
                     for (var k = 0; k < message.dealerCards.length; k++) {
-                        cardsElement.append('<div class="card card' + (k + 1) + ' card-' + message.dealerCards[k].card + '"></div>');
+                        cardsElement.append('<div class="card card' + (k + 1) + ' ' + PR.Utils.cardClass(message.dealerCards[k].card, self.deck, self.fourColour, self.doge) + '"></div>');
                     }
                     if (message.dealerCards.length === 1) {
                         cardsElement.append('<div class="card card2 cardBack"></div>');

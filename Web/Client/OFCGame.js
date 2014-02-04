@@ -258,7 +258,7 @@
                         self.domElement.find(".sideCard").empty();
                         for (var s = 0; s < 3; s++) {
                             if (playerBoards[i].SideBoard[s] !== "") {
-                                self.domElement.find(".sideCard" + (s + 1)).append('<div data-card="' + playerBoards[i].SideBoard[s] + '" class="card liveCard card-' + playerBoards[i].SideBoard[s] + '"></div>');
+                                self.domElement.find(".sideCard" + (s + 1)).append('<div data-card="' + playerBoards[i].SideBoard[s] + '" class="card liveCard ' + PR.Utils.cardClass(playerBoards[i].SideBoard[s], self.deck, self.fourColour, self.doge) + '"></div>');
                             }
                         }
                     }
@@ -280,7 +280,7 @@
                             if (playerBoards[i].Row1[r1].Card !== "" && playerBoards[i].Row1[r1].Card !== "cardBack") {
                                 playerBoards[i].Row1[r1].Card = "card-" + playerBoards[i].Row1[r1].Card;
                             }
-                            self.domElement.find("#r1c" + (r1 + 1) + "-" + self.correctSeatNumber(playerBoards[i].SeatNumber)).empty().append('<div data-card="' + playerBoards[i].Row1[r1].Card + '" class="card ' + liveCard + " " + highlightCard + ' ' + playerBoards[i].Row1[r1].Card + '"></div>');
+                            self.domElement.find("#r1c" + (r1 + 1) + "-" + self.correctSeatNumber(playerBoards[i].SeatNumber)).empty().append('<div data-card="' + playerBoards[i].Row1[r1].Card + '" class="card ' + liveCard + " " + highlightCard + ' ' + PR.Utils.cardClass(playerBoards[i].Row1[r1].Card, self.deck, self.fourColour, self.doge) + '"></div>');
                         }
                         highlightCard = "";
 
@@ -301,7 +301,7 @@
                             if (playerBoards[i].Row2[r2].Card !== "" && playerBoards[i].Row2[r2].Card !== "cardBack") {
                                 playerBoards[i].Row2[r2].Card = "card-" + playerBoards[i].Row2[r2].Card;
                             }
-                            self.domElement.find("#r2c" + (r2 + 1) + "-" + self.correctSeatNumber(playerBoards[i].SeatNumber)).empty().append('<div data-card="' + playerBoards[i].Row2[r2].Card + '" class="card ' + liveCard + " " + highlightCard + ' ' + playerBoards[i].Row2[r2].Card + '"></div>');
+                            self.domElement.find("#r2c" + (r2 + 1) + "-" + self.correctSeatNumber(playerBoards[i].SeatNumber)).empty().append('<div data-card="' + playerBoards[i].Row2[r2].Card + '" class="card ' + liveCard + " " + highlightCard + ' ' + PR.Utils.cardClass(playerBoards[i].Row2[r2].Card, self.deck, self.fourColour, self.doge) + '"></div>');
                         }
                         highlightCard = "";
 
@@ -322,7 +322,7 @@
                             if (playerBoards[i].Row3[r3].Card !== "" && playerBoards[i].Row3[r3].Card !== "cardBack") {
                                 playerBoards[i].Row3[r3].Card = "card-" + playerBoards[i].Row3[r3].Card;
                             }
-                            self.domElement.find("#r3c" + (r3 + 1) + "-" + self.correctSeatNumber(playerBoards[i].SeatNumber)).empty().append('<div data-card="' + playerBoards[i].Row3[r3].Card + '" class="card ' + liveCard + " " + highlightCard + ' ' + playerBoards[i].Row3[r3].Card + '"></div>');
+                            self.domElement.find("#r3c" + (r3 + 1) + "-" + self.correctSeatNumber(playerBoards[i].SeatNumber)).empty().append('<div data-card="' + playerBoards[i].Row3[r3].Card + '" class="card ' + liveCard + " " + highlightCard + ' ' + PR.Utils.cardClass(playerBoards[i].Row3[r3].Card, self.deck, self.fourColour, self.doge) + '"></div>');
                         }
                         highlightCard = "";
                     }

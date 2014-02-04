@@ -1,4 +1,5 @@
-﻿(function (PocketRockets, $, undefined) {
+﻿
+(function (PocketRockets, $, undefined) {
     "use strict";
 
     var PR = PocketRockets;
@@ -170,7 +171,7 @@
             cardsElement.show();
 
             for (var i = 0; i < message.cards.length; i++) {
-                cardsElement.find(".card" + (i + 1)).removeClass().addClass('card card' + (i + 1) + ' card-' + message.cards[i]).show();
+                cardsElement.find(".card" + (i + 1)).removeClass().addClass('card card' + (i + 1) + ' ' +  PR.Utils.cardClass(message.cards[i], self.deck, self.fourColour, self.doge)).show();
                 if (i === message.cards.length - 1) {
                     cardsElement.find(".card" + (i + 1)).addClass('mainCard');
                 }
@@ -196,7 +197,7 @@
             cardsElement.show();
 
             for (var i = 0; i < message.cards.length; i++) {
-                cardsElement.find(".card" + (i + 1)).removeClass().addClass('card card' + (i + 1) + ' card-' + message.cards[i]).show();
+                cardsElement.find(".card" + (i + 1)).removeClass().addClass('card card' + (i + 1) + PR.Utils.cardClass(message.cards[i], self.deck, self.fourColour, self.doge)).show();
                 if (i === message.cards.length - 1) {
                     cardsElement.find(".card" + (i + 1)).addClass('mainCard');
                 }
@@ -581,9 +582,9 @@
 
                 var cardsElement = self.domElement.find('.communityCards');
                 cardsElement.show();
-                cardsElement.find(".card1").removeClass().addClass('card card1 card-' + message.card1).css("visibility", "visible");
-                cardsElement.find(".card2").removeClass().addClass('card card2 card-' + message.card2).css("visibility", "visible");
-                cardsElement.find(".card3").removeClass().addClass('card card3 card-' + message.card3).css("visibility", "visible");
+                cardsElement.find(".card1").removeClass().addClass('card card1 '+ PR.Utils.cardClass(message.card1, self.deck, self.fourColour, self.doge)).css("visibility", "visible");
+                cardsElement.find(".card2").removeClass().addClass('card card2 ' + PR.Utils.cardClass(message.card2, self.deck, self.fourColour, self.doge)).css("visibility", "visible");
+                cardsElement.find(".card3").removeClass().addClass('card card3 ' + PR.Utils.cardClass(message.card3, self.deck, self.fourColour, self.doge)).css("visibility", "visible");
 
                 self.wait = false;
 
@@ -601,7 +602,7 @@
                 self.domElement.find('.seat .bet').hide();
 
                 var cardsElement = self.domElement.find('.communityCards');
-                cardsElement.find(".card4").removeClass().addClass('card card4 card-' + message.card).css("visibility", "visible");
+                cardsElement.find(".card4").removeClass().addClass('card card4 '+ PR.Utils.cardClass(message.card, self.deck, self.fourColour, self.doge)).css("visibility", "visible");
                 self.wait = false;
             }, 500);
         };
@@ -615,7 +616,7 @@
                 self.domElement.find('.seat .bet').hide();
 
                 var cardsElement = self.domElement.find('.communityCards');
-                cardsElement.find(".card5").removeClass().addClass('card card5 card-' + message.card).css("visibility", "visible");
+                cardsElement.find(".card5").removeClass().addClass('card card5 '+ PR.Utils.cardClass(message.card, self.deck, self.fourColour, self.doge)).css("visibility", "visible");
                 self.wait = false;
             }, 500);
         };

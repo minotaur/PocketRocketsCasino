@@ -15,7 +15,10 @@
             windowTitleBarSelector = ".titleBar",
             gameLoopIntervalId,
             usersOnline = [];
-        
+
+        Desktop.deck = 'trad';
+        Desktop.fourColour = true;
+        Desktop.doge = false;
         Desktop.isAndroid = false;
 
         (function init() {
@@ -48,6 +51,55 @@
                 $("#tournamentRegisterDialogue").hide();
 
             },150));
+
+            $("#fourColourButton").unbind("click").click(function () {
+                Desktop.fourColour = !Desktop.fourColour;
+                if (Desktop.fourColour) {
+                    $(this).children().addClass("ui-icon ui-icon-check");
+                } else {
+                    $(this).children().removeClass("ui-icon ui-icon-check");
+                }
+                PR.Desktop.setDeck();
+
+            });
+
+            $("#traditionalButton").unbind("click").click(function () {
+                Desktop.deck = 'trad';
+                Desktop.doge = false;
+                $(".cardCheck").removeClass("ui-icon ui-icon-check");
+                $(this).children().addClass("ui-icon ui-icon-check");
+                PR.Desktop.setDeck();
+
+            });
+
+            $("#jumboButton").unbind("click").click(function () {
+                Desktop.deck = 'jumbo';
+                Desktop.doge = false;
+                $(".cardCheck").removeClass("ui-icon ui-icon-check");
+                $(this).children().addClass("ui-icon ui-icon-check");
+                PR.Desktop.setDeck();
+
+            });
+
+            $("#classicButton").unbind("click").click(function () {
+                Desktop.deck = '';
+                Desktop.doge = false;
+                $(".cardCheck").removeClass("ui-icon ui-icon-check");
+                $(this).children().addClass("ui-icon ui-icon-check");
+                PR.Desktop.setDeck();
+
+            });
+
+            $("#dogecoinButton").unbind("click").click(function () {
+                Desktop.deck = 'trad';
+                Desktop.doge = true;
+                $(".cardCheck").removeClass("ui-icon ui-icon-check");
+                $(this).children().addClass("ui-icon ui-icon-check");
+                PR.Desktop.setDeck();
+
+            });
+
+
 
             $("#soundButton").unbind("click").click(function() {
                 Desktop.sound = !Desktop.sound;
@@ -100,6 +152,7 @@
                 }
                 PR.Lobby.setGameType(0);
                 $(".quickSeatButton").show();
+                $(".investButton").hide();
 
                 $(this).toggleClass("btn-inverse");
                 $("#mainPokerType").show();
@@ -121,6 +174,7 @@
                 }
                 PR.Lobby.setGameType(3);
 
+                $(".investButton").show();
                 $(".quickSeatButton").hide();
                 $("#activeGamesPanel").hide();
                 $("#browsePanel").show();
@@ -252,6 +306,14 @@
                 } else {
                     games[i].getGameState();
                 }
+            }
+        };
+
+        Desktop.setDeck = function (openObserved) {
+            var i;
+            for (i = 0; i < games.length; i++) {
+                games[i].setDeck(Desktop.deck, Desktop.fourColour, Desktop.doge)
+                games[i].getGameState();
             }
         };
 
@@ -702,6 +764,7 @@
             }
 
             game.init(viewModel);
+            game.setDeck(Desktop.deck, Desktop.fourColour, Desktop.doge)
             //game.getGameState();
             games.push(game);
         };
