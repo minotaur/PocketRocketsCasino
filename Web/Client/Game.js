@@ -170,38 +170,38 @@
                 self.customBetButton2 = self.controls.find(".button2");
                 self.customBetButton3 = self.controls.find(".button3");
 
-                self.checkButton.unbind("click").click(PR.Utils.debounce(function (e) {
+                self.checkButton.unbind("click").click(function (e) {
                     self.checkAction();
-                }, 150));
+                });
 
-                self.callButton.unbind("click").click(PR.Utils.debounce(function (e) {
+                self.callButton.unbind("click").click(function (e) {
                     self.callAction();
-                }, 150));
+                });
 
                 self.domElement.find(".showTournamentLobbyButton").unbind("click").click(function (e) {
                     PR.Desktop.showTournamentRegisterDialogue(self.tournamentId);
                 });
 
-                self.betButton.unbind("click").click(PR.Utils.debounce(function (e) {
+                self.betButton.unbind("click").click(function (e) {
                     self.betAction();
-                }, 150));
+                });
 
-                self.raiseButton.unbind("click").click(PR.Utils.debounce(function (e) {
+                self.raiseButton.unbind("click").click(function (e) {
                     self.raiseAction();
-                }, 150));
+                });
 
 
-                self.domElement.find(".doneButton").unbind("click").click(PR.Utils.debounce(function (e) {
+                self.domElement.find(".doneButton").unbind("click").click(function (e) {
                     self.doneAction();
-                }, 150));
+                });
 
-                self.foldButton.unbind("click").click(PR.Utils.debounce(function (e) {
+                self.foldButton.unbind("click").click(function (e) {
                     self.foldAction();
-                }, 150));
+                });
 
-                self.domElement.find(".lastHandButton").unbind("click").click(PR.Utils.debounce(function (e) {
+                self.domElement.find(".lastHandButton").unbind("click").click(function (e) {
                     self.viewLastHand();
-                }, 150));
+                });
 
                 self.sliderAmount.focus(function () {
                     window.setTimeout(function () {
@@ -219,9 +219,9 @@
             self.BindChatButton();
             self.BindSitOutButton();
 
-            self.domElement.find(".waitForBBCheckBox").unbind("click").click(PR.Utils.debounce(function (e) {
+            self.domElement.find(".waitForBBCheckBox").unbind("click").click(function (e) {
                 PR.PokerHub.server.waitForBigBlind(self.id, $(this).is(':checked'));
-            }, 150));
+            });
 
             self.domElement.unbind("click").click(function () {
                 self.bringToFront();
@@ -231,14 +231,14 @@
                 self.getGameState();
             });
             
-            self.domElement.find(".contextButton").unbind("click").click(PR.Utils.debounce(function (e) {
+            self.domElement.find(".contextButton").unbind("click").click(function (e) {
                     self.contextButtonClick();
-            }, 150));
+            });
             
             
-            self.domElement.find(".addChipsButton").unbind("click").click(PR.Utils.debounce(function (e) {
+            self.domElement.find(".addChipsButton").unbind("click").click(function (e) {
                     self.addChipsUIButtonClick();
-            }, 150));
+            });
 
             self.domElement.find(".chatInput").click(function (e) {
             });
@@ -293,17 +293,17 @@
                 self.getGameState();
             });
 
-            self.domElement.find(".leaveTableSubmitBtn").unbind("click").click(PR.Utils.debounce(function (e) {
+            self.domElement.find(".leaveTableSubmitBtn").unbind("click").click(function (e) {
                 self.leaveTableSubmit();
-            }, 150));
+            });
 
-            self.domElement.find(".buyInSubmitBtn").unbind("click").click(PR.Utils.debounce(function (e) {
+            self.domElement.find(".buyInSubmitBtn").unbind("click").click(function (e) {
                 self.buyInSubmit();
-            }, 150));
+            });
 
-            self.domElement.find(".addChipsSubmitBtn").unbind("click").click(PR.Utils.debounce(function (e) {
+            self.domElement.find(".addChipsSubmitBtn").unbind("click").click(function (e) {
                 self.addChipsSubmit();
-            }, 150));
+            });
             
             self.domElement.bind('mousewheel', function (e) {
                 if (e.originalEvent.wheelDelta / 120 > 0) {
@@ -363,6 +363,19 @@
                 buyInDialogue.find(".buyInMaxTableMessage").hide();
             }
 
+            if (message.minBuyIn > 0) {
+                buyInDialogue.find(".hideIfMinBuyIn").hide();
+                buyInDialogue.find(".buyInText").text(PR.Utils.formatCurrency(message.minBuyIn, self.currency));
+                buyInDialogue.find(".buyInTextSI").text(PR.Utils.formatCurrencySI(message.minBuyIn, self.currency));
+                buyInDialogue.find(":radio[value=min]").attr("checked", "true");
+
+                self.minBuyIn(PR.Utils.formatCurrencySI(message.minBuyIn, self.currency));
+            } else
+            {
+                buyInDialogue.find(".hideIfMinBuyIn").show();
+            }
+
+
             var customAmountTextBox = buyInDialogue.find(".otherAmountTextBox");
             
             buyInDialogue.find(".availableBalance").text(PR.Utils.formatCurrency(message.availableBalance, self.currency));
@@ -393,31 +406,37 @@
                         }
                     }
 
-                    if (self.gameType === 4) {
-                        if (betAmount > self.bigBlind * 500) {
-                            betAmount = self.bigBlind * 500;
+                    if (message.minBuyIn === 0) {
+                        if (self.gameType === 4) {
+                            if (betAmount > self.bigBlind * 500) {
+                                betAmount = self.bigBlind * 500;
+                            }
+                        } else {
+                            if (betAmount > self.bigBlind * 250) {
+                                betAmount = self.bigBlind * 250;
+                            }
                         }
-                    } else {
-                        if (betAmount > self.bigBlind * 250) {
-                            betAmount = self.bigBlind * 250;
-                        }
-                    }
 
-                    if (self.gameType === 4 && self.bigBlind >= 50) {
-                        if (betAmount < self.bigBlind * 100) {
-                            betAmount = self.bigBlind * 100;
-                        }
-                    } else {
-                        if (betAmount < self.bigBlind * 50) {
-                            betAmount = self.bigBlind * 50;
+                        if (self.gameType === 4 && self.bigBlind >= 50) {
+                            if (betAmount < self.bigBlind * 100) {
+                                betAmount = self.bigBlind * 100;
+                            }
+                        } else {
+                            if (betAmount < self.bigBlind * 50) {
+                                betAmount = self.bigBlind * 50;
+                            }
                         }
                     }
                 }
-                
                 
                 if (betAmount > message.availableBalance) {
                     betAmount = message.availableBalance;
                 }
+
+                if (betAmount < message.minBuyIn) {
+                    betAmount = message.minBuyIn;
+                }
+
                 betAmount = PR.Utils.currencyDivider(betAmount, self.currency);
 
                 $(this).val(betAmount);
@@ -874,7 +893,7 @@
 
         self.setActiveSeat = function (message) {
             if (self.correctSeatNumber(message.seatNumber) === self.correctSeatNumber(self.mySeat)) {
-                if (PR.Desktop.sound === true) {
+                if(self.domElement.find(".foldCheckBox").is(':checked') === false && PR.Desktop.sound === true) {
                     self.alertSound.play();
                 }
             } else if (self.mySeat != 0 && self.gameType != 4) {
@@ -1157,9 +1176,9 @@
         };
 
         self.BindSitOutButton = function () {
-            self.domElement.find(".sitOutCheckBox").unbind("click").click(PR.Utils.debounce(function () {
+            self.domElement.find(".sitOutCheckBox").unbind("click").click(function () {
                 PR.PokerHub.server.sitOut(self.id, $(this).is(':checked'));
-            }, 150));
+            });
         };
         self.BindChatButton = function () {
             self.domElement.find(".chatInput").keypress(function (event) {
@@ -1170,11 +1189,11 @@
                 }
             });
 
-            self.domElement.find(".chatSubmitButton").unbind("click").click(PR.Utils.debounce(function (event) {
+            self.domElement.find(".chatSubmitButton").unbind("click").click(function (event) {
                     event.preventDefault();
                     PR.PokerHub.server.chat(self.id, self.domElement.find(".chatInputPopup").val());
                     self.domElement.find(".chatInput").val('');
-            }, 150));
+            });
         };
 
         self.showJoinTableButton = function () {

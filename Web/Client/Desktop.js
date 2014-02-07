@@ -40,7 +40,7 @@
 
         function bindUI() { //TODO use knockout to bind
 
-            $(".registerTournamentButton").unbind("click").click(PR.Utils.debounce(function () {
+            $(".registerTournamentButton").unbind("click").click(function () {
                 if ($(".registerTournamentButton:first").text() === "Unregister") {
                     PR.PokerHub.server.unregisterTournament($("#TournamentId").val());
 
@@ -50,7 +50,7 @@
 
                 $("#tournamentRegisterDialogue").hide();
 
-            },150));
+            });
 
             $("#fourColourButton").unbind("click").click(function () {
                 Desktop.fourColour = !Desktop.fourColour;
@@ -119,13 +119,13 @@
                 $("#tournamentRegisterDialogue").hide();
             });
 
-            $(".leaveAllTablesButton").unbind("click").click(PR.Utils.debounce(function () {
+            $(".leaveAllTablesButton").unbind("click").click(function () {
                 PR.PokerHub.server.leaveAllTables();
-            },150));
+            });
 
-            $(".sitInAllTablesButton").unbind("click").click(PR.Utils.debounce(function () {
+            $(".sitInAllTablesButton").unbind("click").click(function () {
                 PR.PokerHub.server.sitInAllTables();
-            },150));
+            });
 
             $('#errorClose').unbind("click").click(function () {
                 $('#errorMessage').text('');
@@ -248,10 +248,10 @@
 
             
             
-            $("#chatSubmitButton").unbind("click").click(PR.Utils.debounce(function () {
+            $("#chatSubmitButton").unbind("click").click(function () {
                 PR.PokerHub.server.lobbyChat($("#lobbyChatInput").val());
                 $("#lobbyChatInput").val('');
-            },150));
+            });
 
                 $("#lobbyChatInput").keypress(function (event) {
                     if (event.which == 13) {
@@ -655,9 +655,9 @@
                         tr.removeClass('row-highlight');
                         $(this).addClass('row-highlight');
                         Desktop.selectedTournamentTable = parseInt($(this).children('td:first').text());
-                        $('#observTournamentTableButton').click(PR.Utils.debounce(function () {
+                        $('#observTournamentTableButton').click(function () {
                             PR.Desktop.openGame(Desktop.selectedTournamentTable, 2, true);
-                        }, 500));
+                        });
                     });
 
                 } else {

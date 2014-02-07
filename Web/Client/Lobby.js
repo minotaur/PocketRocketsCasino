@@ -35,9 +35,9 @@
                             + mappedGames[i].players + '</p><p data-table="' + mappedGames[i].id + '" class="btn btn-primary joinActiveTableBtn">Join Table</p>');
                     }
 
-                    $('.joinActiveTableBtn').click(PR.Utils.debounce(function () {
+                    $('.joinActiveTableBtn').click(function () {
                         PR.Desktop.openGame($(this).data("table"), 0);
-                    }, 150));
+                    });
                     
                 }else
                 {
@@ -263,15 +263,15 @@
         };
 
         function bindUI() {
-            $(".triggerUpdate").click(PR.Utils.debounce(function () {
+            $(".triggerUpdate").click(function () {
                 self.updateLobby();
-            },150));
+            });
 
             Lobby.bindOpenTable();
 
-            $('#openTableButton').click(PR.Utils.debounce(function () {
+            $('#openTableButton').click(function () {
                 PR.Desktop.openGame(selectedGameId, vm.gameStructure());
-            }, 150));
+            });
 
             $(".browseGamesButton").click(function () {
                 $("#browsePanel").show();

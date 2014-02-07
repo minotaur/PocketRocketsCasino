@@ -161,8 +161,8 @@
         PokerHub.client.setUserName = function (userName) {
             PR.Desktop.userName = userName;
         };
-        PokerHub.client.showBuyInDialogue = function (gameId, availableBalance, mergedTable, fromGlobal, atMaxSeats) {
-            PR.Desktop.addMessageToGame(gameId, { availableBalance: availableBalance, mergedTable: mergedTable, fromGlobal: fromGlobal, atMaxSeats: atMaxSeats, messageType: "showBuyInDialogue" });
+        PokerHub.client.showBuyInDialogue = function (gameId, availableBalance, mergedTable, fromGlobal, atMaxSeats, minBuyIn) {
+            PR.Desktop.addMessageToGame(gameId, { availableBalance: availableBalance, mergedTable: mergedTable, fromGlobal: fromGlobal, atMaxSeats: atMaxSeats, minBuyIn: minBuyIn, messageType: "showBuyInDialogue" });
         };
 
         PokerHub.client.showErrorMessage = function (message) {
