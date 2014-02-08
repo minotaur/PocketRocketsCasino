@@ -170,38 +170,38 @@
                 self.customBetButton2 = self.controls.find(".button2");
                 self.customBetButton3 = self.controls.find(".button3");
 
-                self.checkButton.unbind("click").click(function (e) {
+                self.checkButton.unbind("click").click($.debounce( 250, true, function (e) {
                     self.checkAction();
-                });
+                }));
 
-                self.callButton.unbind("click").click(function (e) {
+                self.callButton.unbind("click").click($.debounce( 250, true, function (e) {
                     self.callAction();
-                });
+                }));
 
                 self.domElement.find(".showTournamentLobbyButton").unbind("click").click(function (e) {
                     PR.Desktop.showTournamentRegisterDialogue(self.tournamentId);
                 });
 
-                self.betButton.unbind("click").click(function (e) {
+                self.betButton.unbind("click").click($.debounce( 250, true, function (e) {
                     self.betAction();
-                });
+                }));
 
-                self.raiseButton.unbind("click").click(function (e) {
+                self.raiseButton.unbind("click").click($.debounce( 250, true, function (e) {
                     self.raiseAction();
-                });
+                }));
 
 
-                self.domElement.find(".doneButton").unbind("click").click(function (e) {
+                self.domElement.find(".doneButton").unbind("click").click($.debounce( 250, true, function (e) {
                     self.doneAction();
-                });
+                }));
 
-                self.foldButton.unbind("click").click(function (e) {
+                self.foldButton.unbind("click").click($.debounce( 250, true, function (e) {
                     self.foldAction();
-                });
+                }));
 
-                self.domElement.find(".lastHandButton").unbind("click").click(function (e) {
+                self.domElement.find(".lastHandButton").unbind("click").click($.debounce( 250, true, function (e) {
                     self.viewLastHand();
-                });
+                }));
 
                 self.sliderAmount.focus(function () {
                     window.setTimeout(function () {
@@ -219,26 +219,26 @@
             self.BindChatButton();
             self.BindSitOutButton();
 
-            self.domElement.find(".waitForBBCheckBox").unbind("click").click(function (e) {
+            self.domElement.find(".waitForBBCheckBox").unbind("click").click($.debounce( 250, true, function (e) {
                 PR.PokerHub.server.waitForBigBlind(self.id, $(this).is(':checked'));
-            });
+            }));
 
             self.domElement.unbind("click").click(function () {
                 self.bringToFront();
             });
 
-            self.domElement.find(".refreshTableButton").unbind("click").click(function (e) {
+            self.domElement.find(".refreshTableButton").unbind("click").click($.debounce( 250, true, function (e) {
                 self.getGameState();
-            });
+            }));
             
-            self.domElement.find(".contextButton").unbind("click").click(function (e) {
+            self.domElement.find(".contextButton").unbind("click").click($.debounce( 250, true, function (e) {
                     self.contextButtonClick();
-            });
+            }));
             
             
-            self.domElement.find(".addChipsButton").unbind("click").click(function (e) {
+            self.domElement.find(".addChipsButton").unbind("click").click($.debounce( 250, true, function (e) {
                     self.addChipsUIButtonClick();
-            });
+            }));
 
             self.domElement.find(".chatInput").click(function (e) {
             });
@@ -293,17 +293,17 @@
                 self.getGameState();
             });
 
-            self.domElement.find(".leaveTableSubmitBtn").unbind("click").click(function (e) {
+            self.domElement.find(".leaveTableSubmitBtn").unbind("click").click($.debounce( 250, true, function (e) {
                 self.leaveTableSubmit();
-            });
+            }));
 
-            self.domElement.find(".buyInSubmitBtn").unbind("click").click(function (e) {
+            self.domElement.find(".buyInSubmitBtn").unbind("click").click($.debounce( 250, true, function (e) {
                 self.buyInSubmit();
-            });
+            }));
 
-            self.domElement.find(".addChipsSubmitBtn").unbind("click").click(function (e) {
+            self.domElement.find(".addChipsSubmitBtn").unbind("click").click($.debounce( 250, true, function (e) {
                 self.addChipsSubmit();
-            });
+            }));
             
             self.domElement.bind('mousewheel', function (e) {
                 if (e.originalEvent.wheelDelta / 120 > 0) {
@@ -1176,9 +1176,9 @@
         };
 
         self.BindSitOutButton = function () {
-            self.domElement.find(".sitOutCheckBox").unbind("click").click(function () {
+            self.domElement.find(".sitOutCheckBox").unbind("click").click($.debounce( 250, true, function () {
                 PR.PokerHub.server.sitOut(self.id, $(this).is(':checked'));
-            });
+            }));
         };
         self.BindChatButton = function () {
             self.domElement.find(".chatInput").keypress(function (event) {
@@ -1189,11 +1189,11 @@
                 }
             });
 
-            self.domElement.find(".chatSubmitButton").unbind("click").click(function (event) {
+            self.domElement.find(".chatSubmitButton").unbind("click").click($.debounce( 250, true, function (event) {
                     event.preventDefault();
                     PR.PokerHub.server.chat(self.id, self.domElement.find(".chatInputPopup").val());
                     self.domElement.find(".chatInput").val('');
-            });
+            }));
         };
 
         self.showJoinTableButton = function () {

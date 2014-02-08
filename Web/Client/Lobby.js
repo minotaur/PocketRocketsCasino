@@ -109,6 +109,7 @@
                     
                     PR.PokerHub.server.getBlackJackGames(vm.gameCurrency()).done(function (games) {
                         var mappedGames = $.map(games, function (item) { return new BlackJackGame(item); });
+                        PR.Utils.shuffle(mappedGames);
                             vm.casinoGames(mappedGames);
                             //Lobby.bindOpenTable();
                             Lobby.bindHighlight();

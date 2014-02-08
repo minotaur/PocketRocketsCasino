@@ -420,6 +420,13 @@
                 self.domElement.find(".autoActionButtons").hide();
 
                 self.domElement.find(".potAmount").hide();
+                
+                self.showTotalInPot(
+                    message.totalInPot,
+                    PR.Utils.formatCurrency(message.totalInPot, self.currency),
+                    self.domElement.find(".potTotalText"),
+                    self.domElement.find(".potTotal")
+                );
             }
         };
 

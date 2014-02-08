@@ -53,23 +53,23 @@
 
             self.domElement.find(".betButton").hide();
 
-            self.domElement.find(".standButton").unbind("click").click(function (e) {
+            self.domElement.find(".standButton").unbind("click").click($.debounce( 250, true, function (e) {
                 PR.PokerHub.server.blackJackStand(self.id, self.numberOfCardsDealt, self.currentBetNumber);
                 self.controls.hide();
-            });
+            }));
 
-            self.domElement.find(".hitButton").unbind("click").click(function (e) {
+            self.domElement.find(".hitButton").unbind("click").click($.debounce( 250, true, function (e) {
                 PR.PokerHub.server.blackJackHit(self.id, self.numberOfCardsDealt, self.currentBetNumber);
                 self.controls.hide();
-            });
-            self.domElement.find(".doubleButton").unbind("click").click(function (e) {
+            }));
+            self.domElement.find(".doubleButton").unbind("click").click($.debounce( 250, true, function (e) {
                 PR.PokerHub.server.blackJackDouble(self.id, self.numberOfCardsDealt, self.currentBetNumber);
                 self.controls.hide();
-            });
-            self.domElement.find(".splitButton").unbind("click").click(function (e) {
+            }));
+            self.domElement.find(".splitButton").unbind("click").click($.debounce( 250, true, function (e) {
                 PR.PokerHub.server.blackJackSplit(self.id, self.numberOfCardsDealt, self.currentBetNumber);
                 self.controls.hide();
-            });
+            }));
         }
 
         self.placeBlackJackBets = function ()
@@ -152,7 +152,7 @@
                 self.domElement.find(".sliderAmount").val(PR.Utils.formatCurrencySI(amount, self.currency));
             });
 
-            self.domElement.find(".betButton").unbind("click").click(function (e) {
+            self.domElement.find(".betButton").unbind("click").click($.debounce( 250, true, function (e) {
                 var amount = parseFloat(self.domElement.find(".sliderAmount").val());
                 if (self.currency === 1 || self.currency === 3) {
                     amount = amount / 1000;
@@ -179,7 +179,7 @@
                 PR.PokerHub.server.blackJackBet(self.id, amount);
                 self.controls.hide();
                 self.stopTimer();
-            });
+            }));
 
         }
 

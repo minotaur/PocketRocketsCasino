@@ -248,10 +248,10 @@
 
             
             
-            $("#chatSubmitButton").unbind("click").click(function () {
+            $("#chatSubmitButton").unbind("click").click($.debounce( 250, true, function () {
                 PR.PokerHub.server.lobbyChat($("#lobbyChatInput").val());
                 $("#lobbyChatInput").val('');
-            });
+            }));
 
                 $("#lobbyChatInput").keypress(function (event) {
                     if (event.which == 13) {
