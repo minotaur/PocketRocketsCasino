@@ -239,7 +239,7 @@
                             }
                     });
             $("#lastHandDialogue").draggable({
-                handle: '.modal-header, .lastHandText, .modal-footer',
+                handle: '.modal-header, .modal-footer',
             });
 
             $("#tournamentRegisterDialogue").draggable({
