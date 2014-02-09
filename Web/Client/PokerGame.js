@@ -595,7 +595,7 @@
 
                 self.wait = false;
 
-            }, 200);
+            }, 400);
 
         };
 
@@ -611,7 +611,7 @@
                 var cardsElement = self.domElement.find('.communityCards');
                 cardsElement.find(".card4").removeClass().addClass('card card4 '+ PR.Utils.cardClass(message.card, self.deck, self.fourColour, self.doge)).css("visibility", "visible");
                 self.wait = false;
-            }, 500);
+            }, 800);
         };
         self.dealRiver = function (message) {
             self.wait = true;
@@ -625,7 +625,7 @@
                 var cardsElement = self.domElement.find('.communityCards');
                 cardsElement.find(".card5").removeClass().addClass('card card5 '+ PR.Utils.cardClass(message.card, self.deck, self.fourColour, self.doge)).css("visibility", "visible");
                 self.wait = false;
-            }, 500);
+            }, 800);
         };
 
         self.showTotalInPot = function (potTotal, formattedText, textElement, containerElement) {
@@ -768,6 +768,7 @@
         };
 
         self.newHand = function (message) {
+
             if (self.newBigBlind > 0) {
                 self.bigBlind = self.newBigBlind;
                 self.smallBlind = self.newSmallBlind;

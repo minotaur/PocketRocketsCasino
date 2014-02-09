@@ -34,10 +34,10 @@
                             + mappedGames[i].formatCurrency() + '</p><p>Players: '
                             + mappedGames[i].players + '</p><p data-table="' + mappedGames[i].id + '" class="btn btn-primary joinActiveTableBtn">Join Table</p>');
                     }
-
-                    $('.joinActiveTableBtn').click(function () {
+                    
+                    $('.joinActiveTableBtn').click($.debounce( 250, true, function () {
                         PR.Desktop.openGame($(this).data("table"), 0);
-                    });
+                    }));
                     
                 }else
                 {
@@ -264,15 +264,15 @@
         };
 
         function bindUI() {
-            $(".triggerUpdate").click(function () {
+            $(".triggerUpdate").click($.debounce( 250, true, function () {
                 self.updateLobby();
-            });
+            }));
 
             Lobby.bindOpenTable();
 
-            $('#openTableButton').click(function () {
+            $('#openTableButton').click($.debounce( 250, true, function () {
                 PR.Desktop.openGame(selectedGameId, vm.gameStructure());
-            });
+            }));
 
             $(".browseGamesButton").click(function () {
                 $("#browsePanel").show();

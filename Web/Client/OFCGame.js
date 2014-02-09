@@ -424,7 +424,7 @@
         };
 
         self.liveCardSelectFunc = function (elements) {
-            elements.unbind("click").click($.debounce( 250, true, function (e) {
+            elements.unbind("click").click(function (e) {
                 if (self.fantasyLand) {
                     if (self.selectedCard === null) {
                         e.stopPropagation();
@@ -450,7 +450,7 @@
                     self.domElement.find($(".playerBoard-" + self.correctSeatNumber(self.mySeat))).find(".liveCard").removeClass("highlightCard");
                     $(this).addClass("highlightCard");
                 }
-            }));
+            });
         };
 
         self.hideDoneButtonIfPineapple = function () {
@@ -481,7 +481,7 @@
         };
 
         self.cellClickFunction = function (elements) {
-            elements.unbind("click").click($.debounce( 250, true, function (e) {
+            elements.unbind("click").click(function (e) {
                 if (PR.PokerHub.isConnected() !== true)
                 {
                     PR.Desktop.showErrorMessageTimeout("Connection dropped temporarily: Please try action again.");
@@ -571,7 +571,7 @@
                         
                     }
                 }
-            }));
+            });
 
 
         };
