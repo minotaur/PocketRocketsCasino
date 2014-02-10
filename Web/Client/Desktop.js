@@ -15,7 +15,7 @@
             windowTitleBarSelector = ".titleBar",
             gameLoopIntervalId,
             usersOnline = [];
-
+        Desktop.blockedChat = [];
         Desktop.deck = 'trad';
         Desktop.fourColour = true;
         Desktop.doge = false;
@@ -401,22 +401,9 @@
         };
 
         Desktop.chat = function (gameId, message) {
-            var colour = "000";
-            if (message.indexOf("Dean Nolan:") !== -1) {
-                colour = "d10506";
-            }
+            var game = Desktop.getGameById(gameId);
+            game.addChatMessage(message);
 
-            var scrollChat = false;
-            var scrollChatPopout = false;
-            if($('.chatMessagesContainer .chatMessages' + gameId).scrollTop() + $('.chatMessagesContainer .chatMessages' + gameId).innerHeight() + 2 >= $('.chatMessagesContainer .chatMessages' + gameId)[0].scrollHeight) {
-                scrollChat = true;
-            }
-            if($('.popoutMessages' + gameId).scrollTop() + $('.popoutMessages' + gameId).innerHeight() >= $('.popoutMessages' + gameId)[0].scrollHeight) {
-                scrollChatPopout = true;
-            }
-            $('.chatMessages' + gameId).append('<li style="color:#' + colour + '">' + message + '</li>');
-            if (scrollChat) $('.chatMessagesContainer .chatMessages' + gameId).prop({ scrollTop: $('.chatMessagesContainer .chatMessages' + gameId).prop('scrollHeight') });
-            if (scrollChatPopout) $('.popoutMessages' + gameId).prop({ scrollTop: $('.popoutMessages' + gameId).prop('scrollHeight') });
         };
         
         Desktop.lobbyChat = function (message, time, isLoad) {

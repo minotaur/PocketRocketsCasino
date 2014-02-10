@@ -386,23 +386,12 @@
             self.domElement.find(".progress").hide();
 
             if (message.potAmount > 0) {
-                
-                var result = '<li style="color:#1B84E0">' + message.userName + ' wins the pot ' + PR.Utils.formatCurrency(message.potAmount, self.currency);
+
+                var result = message.userName + ' wins the pot ' + PR.Utils.formatCurrency(message.potAmount, self.currency);
                 if (!PR.Utils.isEmpty(message.description)) {
                     result = result + ' with ' + message.description;
                 }
-                result = result + '</li>';
-                var scrollChat = false;
-                var scrollChatPopout = false;
-                if($('.chatMessagesContainer .chatMessages' + self.id).scrollTop() + $('.chatMessagesContainer .chatMessages' + self.id).innerHeight() + 2 >= $('.chatMessagesContainer .chatMessages' + self.id)[0].scrollHeight) {
-                    scrollChat = true;
-                }
-                if($('.popoutMessages' + self.id).scrollTop() + $('.popoutMessages' + self.id).innerHeight() >= $('.popoutMessages' + self.id)[0].scrollHeight) {
-                    scrollChatPopout = true;
-                }
-                $('.chatMessages' + self.id).append(result);
-                if (scrollChat) $('.chatMessagesContainer .chatMessages' + self.id).prop({ scrollTop: $('.chatMessagesContainer .chatMessages' + self.id).prop('scrollHeight') });
-                if (scrollChatPopout) $('.popoutMessages' + self.id).prop({ scrollTop: $('.popoutMessages' + self.id).prop('scrollHeight') });
+                self.addChatMessage(result, true);
 
                 self.createChipStack(message.potAmount, self.id, self.correctSeatNumber(message.seatNumber), 'bet');
                 self.domElement.find('.seat' + self.correctSeatNumber(message.seatNumber) + ' .bet').show();

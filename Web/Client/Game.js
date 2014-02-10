@@ -293,6 +293,15 @@
                 self.getGameState();
             });
 
+            self.domElement.find(".seat .blockChatButton").unbind("click").click(function () {
+                var seatNumber = $(this).parent().parent().parent().parent().attr("class").replace("seat ", "").replace("seat", "");
+                var seat = self.getSeatByNumber(self.correctSeatNumber(parseInt(seatNumber)));
+                if(seat != null)
+                {
+                    PR.Desktop.blockedChat.push(seat.name());
+                }
+            });
+
             self.domElement.find(".leaveTableSubmitBtn").unbind("click").click($.debounce( 250, true, function (e) {
                 self.leaveTableSubmit();
             }));
@@ -709,7 +718,7 @@
             self.domElement.find(".contextButton").show();
             
             if (PR.Desktop.sound === true) {
-                self.alertSound.play();
+                self.alertFinalSound.play();
             }
         };
 
@@ -734,17 +743,7 @@
 
         self.showTournamentStartMesage = function () {
             setTimeout(function () {
-                var scrollChat = false;
-                var scrollChatPopout = false;
-                if($('.chatMessagesContainer .chatMessages' + self.id).scrollTop() + $('.chatMessagesContainer .chatMessages' + self.id).innerHeight() + 2 >= $('.chatMessagesContainer .chatMessages' + self.id)[0].scrollHeight) {
-                    scrollChat = true;
-                }
-                if($('.popoutMessages' + self.id).scrollTop() + $('.popoutMessages' + self.id).innerHeight() >= $('.popoutMessages' + self.id)[0].scrollHeight) {
-                    scrollChatPopout = true;
-                }
-                $('.chatMessages' + self.id).append("Tournament starting in 1 minute");
-                if (scrollChat) $('.chatMessagesContainer .chatMessages' + self.id).prop({ scrollTop: $('.chatMessagesContainer .chatMessages' + self.id).prop('scrollHeight') });
-                if (scrollChatPopout) $('.popoutMessages' + self.id).prop({ scrollTop: $('.popoutMessages' + self.id).prop('scrollHeight') });
+                self.addChatMessage("Tournament starting in 1 minute", true);
             }, 1000);            
         };
 
@@ -919,6 +918,36 @@
                 }
             }
         };
+
+        self.addChatMessage = function (message, dealerChat) {
+            if (PR.Utils.containsObject(message.split(':')[0], PR.Desktop.blockedChat) === true) {
+                return;
+            }
+
+            var color = "000";
+            if (dealerChat)
+            {
+                color = "#1B84E0";
+            }
+            if (message.indexOf("Dean Nolan:") !== -1) {
+                color = "d10506";
+            }
+
+            message = '<li style="color:' + color + '">' + message + '</li>';
+
+            var scrollChat = false;
+            var scrollChatPopout = false;
+            if ($('.chatMessagesContainer .chatMessages' + self.id).scrollTop() + $('.chatMessagesContainer .chatMessages' + self.id).innerHeight() + 2 >= $('.chatMessagesContainer .chatMessages' + self.id)[0].scrollHeight) {
+                scrollChat = true;
+            }
+            if ($('.popoutMessages' + self.id).scrollTop() + $('.popoutMessages' + self.id).innerHeight() >= $('.popoutMessages' + self.id)[0].scrollHeight) {
+                scrollChatPopout = true;
+            }
+
+            $('.chatMessages' + self.id).append(message);
+            if (scrollChat) $('.chatMessagesContainer .chatMessages' + self.id).prop({ scrollTop: $('.chatMessagesContainer .chatMessages' + self.id).prop('scrollHeight') });
+            if (scrollChatPopout) $('.popoutMessages' + self.id).prop({ scrollTop: $('.popoutMessages' + self.id).prop('scrollHeight') });
+        }
        
         self.buyInSuccess = function (message) {
             var seat = self.getSeatByNumber(message.seatNumber);
@@ -927,6 +956,7 @@
                 
                 seat.chips(PR.Utils.formatCurrency(message.amount, self.currency));
                 seat.setState(PR.SeatStates.full);
+                self.addChatMessage(message.userName + " joined the table", true);
             }
         };
 
