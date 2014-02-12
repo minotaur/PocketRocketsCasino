@@ -643,3 +643,7 @@ top: 53%;
 height: 111px;
 border-radius: 20px;
 }
+
+.kohidden {
+    display:none
+}
