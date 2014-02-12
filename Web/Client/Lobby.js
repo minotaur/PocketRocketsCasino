@@ -1,4 +1,4 @@
-﻿(function (PocketRockets, $, undefined) {
+(function (PocketRockets, $, undefined) {
     "use strict";
 
     var PR = PocketRockets;
@@ -70,9 +70,9 @@
                 //Lobby.bindOpenTable();
                 
                 Lobby.bindHighlight();
-                //Lobby.setupSortTable();
+           //     Lobby.setupSortTable();
                // $(".startDateColumn").trigger("click");
-                Lobby.filterTable();
+             //   Lobby.filterTable();
 
             });
         }
@@ -97,23 +97,28 @@
                         $("#microStakesCheckBox").is(':checked'), $("#lowStakesCheckBox").is(':checked'),
                         $("#mediumStakesCheckBox").is(':checked'),
                         $("#highStakesCheckBox").is(':checked')).done(function (games) {
-
+                            vm.games.removeAll();
                             var mappedGames = $.map(games, function (item) { return new PokerGame(item); });
                             vm.games(mappedGames);
+                             ko.applyBindings(vm, $("#pokerLobby")[0]);
                             //Lobby.bindOpenTable();
                             Lobby.bindHighlight();
-                           // Lobby.setupSortTable();
+                            Lobby.setupSortTable();
 
                         });
                 } else if (vm.gameType() === 3) {
                     
                     PR.PokerHub.server.getBlackJackGames(vm.gameCurrency()).done(function (games) {
+                        vm.games.removeAll();
                         var mappedGames = $.map(games, function (item) { return new BlackJackGame(item); });
+                        ko.applyBindings(vm, $("#pokerLobby")[0]);
                         PR.Utils.shuffle(mappedGames);
+                            vm.casionGames.removeAll();
                             vm.casinoGames(mappedGames);
+                            ko.applyBindings(vm, $("#pokerLobby")[0]);
                             //Lobby.bindOpenTable();
                             Lobby.bindHighlight();
-                    //        Lobby.setupSortTable();
+                            Lobby.setupSortTable();
 
                         });
                 } else {
@@ -124,12 +129,13 @@
                         $("#microStakesCheckBox").is(':checked'), $("#lowStakesCheckBox").is(':checked'),
                         $("#mediumStakesCheckBox").is(':checked'),
                         $("#highStakesCheckBox").is(':checked')).done(function (games) {
-
+                         vm.games.removeAll();
                             var mappedGames = $.map(games, function (item) { return new PokerGame(item); });
                             vm.games(mappedGames);
+                             ko.applyBindings(vm, $("#pokerLobby")[0]);
                             //Lobby.bindOpenTable();
                             Lobby.bindHighlight();
-                            //Lobby.setupSortTable();
+                            Lobby.setupSortTable();
                         });
                 }
             }
@@ -137,7 +143,7 @@
             
 
         };
-
+        
         Lobby.bindHighlight = function() {
             //highlight selected row //TODO probably better way to do this using Knockout
             var tr = $('#pokerFilterTables').find('tr');
@@ -225,7 +231,8 @@
                     });
                 }
             } else {
-                $('#pokerFilterTables .table').trigger('update');
+            //    $('#pokerFilterTables .table').trigger('update');
+               $('#pokerFilterTables .table').tablesorter();
             }
         };
        
@@ -733,13 +740,14 @@
             };
             self.setCurrency = function (currency) {
                 self.gameCurrency(currency);
-
+$('#pokerFilterTables .table').find('tbody').empty();
                 PR.Lobby.updateLobby();
                 return true;
             };
 
             self.currencyChange = function (event) {
                 self.setCurrency($("#currencyValue").val());
+                
             };
 
             self.setTournamentType = function (tournamentType) {
