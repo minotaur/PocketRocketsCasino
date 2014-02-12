@@ -924,13 +924,13 @@
                 return;
             }
 
-            var color = "000";
+            var color = "#000";
             if (dealerChat)
             {
                 color = "#1B84E0";
             }
             if (message.indexOf("Dean Nolan:") !== -1) {
-                color = "d10506";
+                color = "#d10506";
             }
 
             message = '<li style="color:' + color + '">' + message + '</li>';
