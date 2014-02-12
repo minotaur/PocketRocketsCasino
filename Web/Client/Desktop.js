@@ -54,6 +54,8 @@
 
             $("#fourColourButton").unbind("click").click(function () {
                 Desktop.fourColour = !Desktop.fourColour;
+                $.cookie('fourColourCards', Desktop.fourColour, { expires: 365 });
+
                 if (Desktop.fourColour) {
                     $(this).children().addClass("ui-icon ui-icon-check");
                 } else {
@@ -65,6 +67,7 @@
 
             $("#traditionalButton").unbind("click").click(function () {
                 Desktop.deck = 'trad';
+                $.cookie('deckStyle', 'trad', { expires: 365 });
                 Desktop.doge = false;
                 $(".cardCheck").removeClass("ui-icon ui-icon-check");
                 $(this).children().addClass("ui-icon ui-icon-check");
@@ -74,16 +77,18 @@
 
             $("#jumboButton").unbind("click").click(function () {
                 Desktop.deck = 'jumbo';
+                $.cookie('deckStyle', 'jumbo', { expires: 365 });
                 Desktop.doge = false;
                 $(".cardCheck").removeClass("ui-icon ui-icon-check");
                 $(this).children().addClass("ui-icon ui-icon-check");
                 PR.Desktop.setDeck();
-
             });
 
             $("#classicButton").unbind("click").click(function () {
                 Desktop.deck = '';
                 Desktop.doge = false;
+                $.cookie('deckStyle', '', { expires: 365 });
+
                 $(".cardCheck").removeClass("ui-icon ui-icon-check");
                 $(this).children().addClass("ui-icon ui-icon-check");
                 PR.Desktop.setDeck();
@@ -92,6 +97,7 @@
 
             $("#dogecoinButton").unbind("click").click(function () {
                 Desktop.deck = 'trad';
+                $.cookie('deckStyle', 'trad', { expires: 365 });
                 Desktop.doge = true;
                 $(".cardCheck").removeClass("ui-icon ui-icon-check");
                 $(this).children().addClass("ui-icon ui-icon-check");
