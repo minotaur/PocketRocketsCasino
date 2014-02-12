@@ -158,8 +158,12 @@
 
                         if (seats[i].away === true) {
                             seat.setState(PR.SeatStates.sitOut);
-
+                            self.domElement.find(".seat" + self.correctSeatNumber(seats[i].seatNumber)).attr('title', PR.Utils.formatCurrency(seats[i].chips, self.currency));
+                        } else {
+                            self.domElement.find(".seat" + self.correctSeatNumber(seats[i].seatNumber)).attr('title', '');
                         }
+
+
                     }
                 }
 

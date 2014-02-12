@@ -90,7 +90,11 @@ PR.FlopGame = function (id) {
                 PR.Utils.formatCurrency(seats[i].chips, self.currency),
                 seats[i].state,
                 seats[i].away)
-
+            if (seats[i].away) {
+                self.domElement.find(".seat" + self.correctSeatNumber(seats[i].seatNumber)).attr('title', PR.Utils.formatCurrency(seats[i].chips, self.currency));
+            } else {
+                self.domElement.find(".seat" + self.correctSeatNumber(seats[i].seatNumber)).attr('title', '');
+            }
             if (seat != null && seat.state !== PR.SeatStates.open) {
                 playersInGame++;
             }
