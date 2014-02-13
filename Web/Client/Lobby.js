@@ -109,11 +109,12 @@
                 } else if (vm.gameType() === 3) {
                     
                     PR.PokerHub.server.getBlackJackGames(vm.gameCurrency()).done(function (games) {
-                        vm.casinoGames(mappedGames);
+                        vm.casinoGames.removeAll();
                         var mappedGames = $.map(games, function (item) { return new BlackJackGame(item); });
                         PR.Utils.shuffle(mappedGames);
                         vm.casinoGames(mappedGames);
                         ko.applyBindings(vm, $("#pokerLobby")[0]);
+
                         //Lobby.bindOpenTable();
                             Lobby.bindHighlight();
                             Lobby.setupSortTable();
