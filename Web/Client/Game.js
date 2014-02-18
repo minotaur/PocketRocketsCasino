@@ -1,4 +1,5 @@
 ﻿
+
 (function (PocketRockets, $, undefined) {
     "use strict";
 
@@ -314,6 +315,7 @@
                 self.addChipsSubmit();
             }));
             
+
             self.domElement.bind('mousewheel', function (e) {
                 if (e.originalEvent.wheelDelta / 120 > 0) {
                     self.slider.slider("value", self.slider.slider("value") + self.slider.slider("option", "step"));

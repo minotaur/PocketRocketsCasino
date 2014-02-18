@@ -8,7 +8,7 @@
         self.lastBet = 0;
         self.currentBetNumber = 0;
         PR.Game.call(this, id);
-        
+
         self.prototype = Object.create(PR.Game.prototype);
         self.constructor = PR.BlackJackGame;
 
@@ -22,15 +22,14 @@
 
             self.minBuyIn(PR.Utils.formatCurrencySI(viewModel.MinBuyIn, viewModel.Currency));
             self.maxBuyIn(PR.Utils.formatCurrencySI(viewModel.MaxBuyIn, viewModel.Currency));
-          
-            
+
+
             self.g_init(viewModel);
         };
-        
+
         self.numberOfCardsDealt = 0;
 
-        self.showBetInProgressButtons = function (canSplit, canDouble)
-        {
+        self.showBetInProgressButtons = function (canSplit, canDouble) {
             self.controls.show();
             self.domElement.find(".row1").hide();
             self.domElement.find(".row2").hide();
@@ -53,27 +52,25 @@
 
             self.domElement.find(".betButton").hide();
 
-            self.domElement.find(".standButton").unbind("click").click($.debounce( 250, true, function (e) {
+            self.domElement.find(".standButton").unbind("click").click($.debounce(250, true, function (e) {
                 PR.PokerHub.server.blackJackStand(self.id, self.numberOfCardsDealt, self.currentBetNumber);
                 self.controls.hide();
             }));
 
-            self.domElement.find(".hitButton").unbind("click").click($.debounce( 250, true, function (e) {
+            self.domElement.find(".hitButton").unbind("click").click($.debounce(250, true, function (e) {
                 PR.PokerHub.server.blackJackHit(self.id, self.numberOfCardsDealt, self.currentBetNumber);
                 self.controls.hide();
             }));
-            self.domElement.find(".doubleButton").unbind("click").click($.debounce( 250, true, function (e) {
+            self.domElement.find(".doubleButton").unbind("click").click($.debounce(250, true, function (e) {
                 PR.PokerHub.server.blackJackDouble(self.id, self.numberOfCardsDealt, self.currentBetNumber);
                 self.controls.hide();
             }));
-            self.domElement.find(".splitButton").unbind("click").click($.debounce( 250, true, function (e) {
+            self.domElement.find(".splitButton").unbind("click").click($.debounce(250, true, function (e) {
                 PR.PokerHub.server.blackJackSplit(self.id, self.numberOfCardsDealt, self.currentBetNumber);
                 self.controls.hide();
             }));
-        }
-
-        self.placeBlackJackBets = function ()
-        {
+        };
+        self.placeBlackJackBets = function () {
             if (self.numberOfCardsDealt < 1) {
                 self.controls.show();
                 self.domElement.find(".row1").show();
@@ -112,7 +109,7 @@
             });
             self.domElement.find(".button2").unbind("click").click(function (e) {
                 var amount = parseFloat(self.domElement.find(".sliderAmount").val());
-                amount = PR.Utils.currencyMultiplier(amount, self.currency)
+                amount = PR.Utils.currencyMultiplier(amount, self.currency);
                 amount = amount + self.minBet;
 
                 if (amount > self.maxBet)
@@ -152,15 +149,32 @@
                 self.domElement.find(".sliderAmount").val(PR.Utils.formatCurrencySI(amount, self.currency));
             });
 
-            self.domElement.find(".betButton").unbind("click").click($.debounce( 250, true, function (e) {
+            // Maximum and Minimum Bet Buttons
+            self.domElement.find(".button-max").unbind("click").click(function (e) {
+                var amount = Math.min(self.playerChips, self.maxBet);
+
+                amount = PR.Utils.currencyMultiplier(amount, self.currency);
+                self.lastBet = amount;
+
+                self.domElement.find(".sliderAmount").val(PR.Utils.formatCurrencySI(amount, self.currency));
+            });
+            self.domElement.find(".button-min").unbind("click").click(function (e) {
+                var amount = self.minBet;
+
+                amount = PR.Utils.currencyMultiplier(amount, self.currency);
+                self.lastBet = amount;
+
+                self.domElement.find(".sliderAmount").val(PR.Utils.formatCurrencySI(amount, self.currency));
+            });
+
+            self.domElement.find(".betButton").unbind("click").click($.debounce(250, true, function (e) {
                 var amount = parseFloat(self.domElement.find(".sliderAmount").val());
                 if (self.currency === 1 || self.currency === 3) {
                     amount = amount / 1000;
                 }
 
-                var amountRounded = parseFloat(PR.Utils.formatCurrencySI(amount, self.currency)/1000);
-                if (amountRounded > parseFloat(PR.Utils.formatCurrencySI(self.maxBet, self.currency) / 1000))
-                {
+                var amountRounded = parseFloat(PR.Utils.formatCurrencySI(amount, self.currency) / 1000);
+                if (amountRounded > parseFloat(PR.Utils.formatCurrencySI(self.maxBet, self.currency) / 1000)) {
                     PR.Desktop.showErrorMessageTimeout("Bet amount must be less than max bet");
                     return;
                 }
@@ -181,7 +195,7 @@
                 self.stopTimer();
             }));
 
-        }
+        };
 
         self.dealBlackJackPlayerCard = function (msg) {
             if (msg.currentBetNumber == 2) {
@@ -189,8 +203,7 @@
 
                 var cardsElement = self.domElement.find('.playerCards2');
                 cardsElement.append('<div class="card card' + msg.cardNumber + ' ' + PR.Utils.cardClass(msg.card, self.deck, self.fourColour, self.doge) + '"></div>');
-            }else 
-            {
+            } else {
                 self.domElement.find(".playerScore").text(msg.score).show();
 
                 var cardsElement = self.domElement.find('.playerCards');
@@ -231,7 +244,7 @@
             }
         };
 
-        
+
 
         self.updateGameState = function (message) {
             if (self.wait === false) {
@@ -280,7 +293,7 @@
                 if (fullSeats === self.maxSeats) {
                     self.hideContextButton();
                 }
-                
+
                 ////if user at table
                 if (self.mySeat > 0) {
                     self.showTableButtons();
@@ -296,7 +309,7 @@
 
                                 self.domElement.find(".playerScore").text(message.playerScore).show();
 
-                            }, 1700);  
+                            }, 1700);
                         } else {
                             self.showBetInProgressButtons(message.canSplit, message.canDouble);
                         }
@@ -304,13 +317,13 @@
                     else {
                         self.controls.hide();
                     }
-                    
+
                     if (self.playerChips == 0) {
                         self.showAddChipsActionButton();
                     }
 
 
-                } 
+                }
 
                 ////highlight seat with current action
                 if (playersInGame > 0) {
@@ -319,17 +332,17 @@
 
                     self.domElement.find('.seat .seatBackground').removeClass("activeSeat");
 
-                    
+
                     self.domElement.find('.seat' + self.correctSeatNumber(message.seatWithCurrentAction) + ' .seatBackground').addClass("activeSeat");
-                    
+
                 }
-                
+
 
                 if (timerStarted === true) {
                     self.startTimer({ seatNumber: seatWithCurrentAction, timerTime: PR.Utils.roundToNearest(30000 - timer, 1000) });
                 }
 
-                
+
                 self.domElement.find(".dealerResult").text(message.dealerResult);
                 self.domElement.find(".playerResult").text(message.playerResult);
                 self.domElement.find(".playerResult2").text(message.playerResult2);
@@ -347,14 +360,12 @@
                         cardsElement.append('<div class="card card' + (k + 1) + ' ' + PR.Utils.cardClass(playerCards[k].card, self.deck, self.fourColour, self.doge) + '"></div>');
                     }
 
-                    if (self.numberOfCardsDealt === 4)
-                    {
+                    if (self.numberOfCardsDealt === 4) {
                         cardsElement.children().each(function (index) {
                             $(this).delay(500 * (index + 1)).fadeIn(0, function () {
                             });
                         }).hide();
-                    }else
-                    {
+                    } else {
                         self.domElement.find(".playerScore").text(message.playerScore).show();
 
                     }
@@ -389,41 +400,36 @@
                     var cardsElement = self.domElement.find('.playerCards2');
                     cardsElement.empty();
                     cardsElement.hide();
-                    self.domElement.find('.playerCards').css({left: '32%'});
+                    self.domElement.find('.playerCards').css({ left: '32%' });
                     self.domElement.find('.playerResult').css({ left: '26%' });
                     self.domElement.find('.playerScore').css({ left: '40%' });
-
                     self.domElement.find('.playerResult2').hide();
                     self.domElement.find('.indicator1').hide();
                     self.domElement.find('.indicator2').hide();
-
-
                 }
 
                 if (message.dealerCards != "" && message.dealerCards != null) {
                     var cardsElement = self.domElement.find('.dealerCards');
                     cardsElement.empty();
-                    
+
                     for (var k = 0; k < message.dealerCards.length; k++) {
                         cardsElement.append('<div class="card card' + (k + 1) + ' ' + PR.Utils.cardClass(message.dealerCards[k].card, self.deck, self.fourColour, self.doge) + '"></div>');
                     }
                     if (message.dealerCards.length === 1) {
                         cardsElement.append('<div class="card card2 cardBack"></div>');
                     }
-                    
+
                     if (self.numberOfCardsDealt === 4) {
                         cardsElement.children().each(function (index) {
                             $(this).delay(700 * (index + 1)).fadeIn(0, function () {
                             });
                         }).hide();
-                    }else
-                    {
-                        if(message.dealerScore > 0)
+                    } else {
+                        if (message.dealerScore > 0)
                             self.domElement.find(".dealerScore").text(message.dealerScore).show();
                     }
 
-                }else 
-                {
+                } else {
                     var cardsElement = self.domElement.find('.dealerCards');
                     cardsElement.empty();
                     self.domElement.find(".dealerScore").text(message.dealerScore).hide();

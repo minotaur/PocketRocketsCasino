@@ -178,15 +178,28 @@
             }
         };
 
-        self.dealCards = function (message) { //TODO needs refactored to deal with any amount of cards
+        
+
+        self.dealCards = function (message) { 
             var cardsElement;
             for (var i = 0; i < message.seatsWithPlayers.length; i++) {
-                cardsElement = self.domElement.find('.seat' + self.correctSeatNumber(message.seatsWithPlayers[i]) + ' .cards');
+                cardsElement = self.domElement.find('.seat' + self.correctSeatNumber(message.seatsWithPlayers[i].Item1) + ' .cards');
                 cardsElement.show();
-                if (message.seatsWithPlayers[i] != self.mySeat) {
+                if (message.seatsWithPlayers[i].Item1 != self.mySeat) {
 
-                    for (var k = 0; k < message.numberOfPlayerCards; k++) {
-                        cardsElement.find(".card" + (k + 1)).removeClass().addClass('card card' + (k + 1) + ' cardBack').show();
+                    if (message.seatsWithPlayers[i].Item2 != undefined && message.seatsWithPlayers[i].Item2.length > 0) {
+                        for (var j = 0; j < message.seatsWithPlayers[i].Item2.length; j++) {
+                            cardsElement.find(".card" + (j + 1)).removeClass().addClass('card card' + (j + 1) + ' ' + PR.Utils.cardClass(message.seatsWithPlayers[i].Item2[j], self.deck, self.fourColour, self.doge)).show();
+                            if (j === message.seatsWithPlayers[i].Item2.length - 1) {
+                                cardsElement.find(".card" + (j + 1)).addClass('mainCard');
+                            }
+                        }
+
+                    } else {
+
+                        for (var k = 0; k < message.numberOfPlayerCards; k++) {
+                            cardsElement.find(".card" + (k + 1)).removeClass().addClass('card card' + (k + 1) + ' cardBack').show();
+                        }
                     }
                 }
             }
@@ -206,15 +219,15 @@
 
         self.setupCustomBetButtons = function (totalInPot, amountToCall, currentStreet, lastRaiseAmount, playerChips, minimumRaise, canRaise, amountAlreadyCommitted) {
             var potSizeBet = PR.Utils.calculatePotSizeBet(totalInPot, amountToCall, amountAlreadyCommitted);
-            var bet2P5X = PR.Utils.roundToNearest(self.bigBlind * 2.5, self.bigBlind);
-            var bet3X = PR.Utils.roundToNearest(self.bigBlind * 3, self.bigBlind);
+            var bet2P5X = self.bigBlind * 2.5;
+            var bet3X = self.bigBlind * 3;
             var bet50 = 0;
             var bet66 = 0;
 
             var raisedPot = (lastRaiseAmount > 0);
 
-            bet50 = PR.Utils.roundToNearest(PR.Utils.calculatePotSizePercentBet(totalInPot, amountToCall, lastRaiseAmount, amountAlreadyCommitted, 0.5), self.bigBlind);
-            bet66 = PR.Utils.roundToNearest(PR.Utils.calculatePotSizePercentBet(totalInPot, amountToCall, lastRaiseAmount, amountAlreadyCommitted, 0.66), self.bigBlind);
+            bet50 = PR.Utils.calculatePotSizePercentBet(totalInPot, amountToCall, lastRaiseAmount, amountAlreadyCommitted, 0.5);
+            bet66 = PR.Utils.calculatePotSizePercentBet(totalInPot, amountToCall, lastRaiseAmount, amountAlreadyCommitted, 0.66);
 
             self.customBetButton1.css('visibility', 'visible').data("raised", raisedPot);
             self.customBetButton2.css('visibility', 'visible').data("raised", raisedPot);
