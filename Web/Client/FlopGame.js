@@ -1,4 +1,4 @@
-﻿(function (PocketRockets, $, undefined) {
+(function (PocketRockets, $, undefined) {
     "use strict";
 
     var PR = PocketRockets;
@@ -100,9 +100,9 @@
                 }
             }
 
-            if (parseInt(message.gameState) !== 6) {
+            //if (parseInt(message.gameState) !== 6) {
                 self.dealCards(message);
-            }
+            //}
 
             if (playersInGame > 1) {
                 self.moveDealerButton(message);
@@ -144,7 +144,7 @@
                             //self.domElement.find(".seat" + self.correctSeatNumber(self.mySeat)).find(".cards").addClass("folded");
                             var folded = true;
                             for (var z = 0; z < message.seatsWithPlayers.length; z++) {
-                                if (message.seatsWithPlayers[z] == self.mySeat) {
+                                if (message.seatsWithPlayers[z].Item1 == self.mySeat) {
                                     folded = false;
 
                                 }
@@ -258,7 +258,11 @@
 
                         if (self.domElement.find('.seat' + self.correctSeatNumber(userSeatNumber) + ' .cards').hasClass("folded") === false) {
                             self.domElement.find(".autoActionButtons").show();
-
+                            if (self.getSeatByNumber(self.mySeat).state === 2) {
+                                    self.domElement.find(".foldCheckBoxContainer").show();
+                                    } else {
+                                     self.domElement.find(".foldCheckBoxContainer").hide();
+                               }
                         }
                     }
 
@@ -274,6 +278,7 @@
 
                     } else {
                         self.domElement.find(".foldCheckBoxContainer").show();
+                        self.domElement.find(".waitCheckBoxContainer").hide();
                         if (self.getSeatByNumber(self.mySeat).state === 3) {
                             self.domElement.find(".autoActionButtons").hide();
                             self.domElement.find(".foldCheckBoxContainer").hide();
