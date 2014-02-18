@@ -255,5 +255,6 @@ packages
 
 *.jpg
 web/themes/img
-
+/_NCrunch_PocketRocketsCasino/
+1app_offline.htm
 web/scripts

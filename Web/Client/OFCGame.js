@@ -162,8 +162,6 @@
                         } else {
                             self.domElement.find(".seat" + self.correctSeatNumber(seats[i].seatNumber)).attr('title', '');
                         }
-
-
                     }
                 }
 

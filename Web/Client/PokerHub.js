@@ -94,8 +94,10 @@
                 }, 2000);
             });
 
-            //$.connection.hub.logging = true;
-            
+            //if ($("#UserName").val() === "Dean Nolan") {
+                $.connection.hub.logging = true;
+            //}
+
             $.connection.hub.start({ transport: ['foreverFrame', 'serverSentEvents', 'longPolling'] }).done(function () {
                 PR.Desktop.hideLoadingImage();
                 
@@ -167,6 +169,14 @@
 
         PokerHub.client.showErrorMessage = function (message) {
             PR.Desktop.showErrorMessage(message);
+        };
+
+        PokerHub.client.showAllPlayersMessage = function (message, title) {
+            $('#errorMessage').text(message);
+            $('.alert-heading').text(title);
+            $('#errorDialogue').css("z-index", ++PR.Desktop.zIndex).show();
+
+
         };
 
         PokerHub.client.showDrawMessage = function (gameId) {
@@ -319,7 +329,7 @@
             PR.Desktop.usersOnline = [];
 
             for (var i = 0; i < onlinePlayers.length; i++) {
-                PR.Desktop.usersOnline.push({ id: i + 1, name: onlinePlayers[i], 'avatar': 'https://pocketrocketscasino.com/content/img/avatars/' + onlinePlayers[i].replace(" ", "%20") + '.jpg', 'type': 'contact' });
+                PR.Desktop.usersOnline.push({ id: i + 1, name: onlinePlayers[i], 'avatar': 'https://pocketrocketscasino.eu/content/img/avatars/' + onlinePlayers[i].replace(" ", "%20") + '.jpg', 'type': 'contact' });
                 $('#playersOnline').append('<li>' + onlinePlayers[i] + '</li>');
             }
 

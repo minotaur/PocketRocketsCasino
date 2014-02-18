@@ -503,13 +503,12 @@
         function PokerGame(data) {
             var self = this;
             self.id = data.Id;
-
+            
             var smallBlind = data.SmallBlind;
             var bigBlind = data.BigBlind;
             self.gameType = data.GameType;
             self.limit = data.Limit;
             if (data.GameType === 4) {
-
                 self.stake = PR.Utils.formatCurrency(bigBlind, data.Currency) + " / point";
             } else {
                 self.stake = PR.Utils.formatCurrency(smallBlind, data.Currency) + " / " + PR.Utils.formatCurrency(bigBlind, data.Currency);
@@ -520,9 +519,19 @@
             self.currency = data.Currency;
             self.rowClass = "gameRow";
 
-            for (var i = 0; i < data.Seats.length; i++) {
-                if (data.Seats[i].Player != null && PR.Desktop.userName != undefined && data.Seats[i].Player.UserName.toLowerCase() == PR.Desktop.userName.toLowerCase()) {
-                    self.rowClass = "gameRow seatedRow";
+            if (data.Seats != undefined) {
+                for (var i = 0; i < data.Seats.length; i++) {
+                    if (data.Seats[i].Player != null && PR.Desktop.userName != undefined && data.Seats[i].Player.UserName.toLowerCase() == PR.Desktop.userName.toLowerCase()) {
+                        self.rowClass = "gameRow seatedRow";
+                    }
+                }
+            }
+
+            if (data.Players != undefined) {
+                for (var i = 0; i < data.Players.length; i++) {
+                    if (PR.Desktop.userName != undefined && data.Players[i].toLowerCase() == PR.Desktop.userName.toLowerCase()) {
+                        self.rowClass = "gameRow seatedRow";
+                    }
                 }
             }
 
@@ -602,11 +611,22 @@
 
             self.rowClass = "gameRow";
 
-            for (var i = 0; i < data.Seats.length; i++) {
-                if (data.Seats[i].Player != null && PR.Desktop.userName != undefined && data.Seats[i].Player.UserName.toLowerCase() == PR.Desktop.userName.toLowerCase()) {
-                    self.rowClass = "gameRow seatedRow";
+            if (data.Seats != undefined) {
+                for (var i = 0; i < data.Seats.length; i++) {
+                    if (data.Seats[i].Player != null && PR.Desktop.userName != undefined && data.Seats[i].Player.UserName.toLowerCase() == PR.Desktop.userName.toLowerCase()) {
+                        self.rowClass = "gameRow seatedRow";
+                    }
                 }
             }
+
+            if (data.Players != undefined) {
+                for (var i = 0; i < data.Players.length; i++) {
+                    if (PR.Desktop.userName != undefined && data.Players[i].toLowerCase() == PR.Desktop.userName.toLowerCase()) {
+                        self.rowClass = "gameRow seatedRow";
+                    }
+                }
+            }
+
         }
 
         function ViewModel(gameType, gameStructure, gameLimit, games, currency) {

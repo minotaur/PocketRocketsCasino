@@ -77,11 +77,10 @@
             };
         };
 
-        Utils.shuffle = function (array) {
-            var currentIndex = array.length
-              , temporaryValue
-              , randomIndex
-            ;
+        Utils.shuffle = function(array) {
+            var currentIndex = array.length,
+                temporaryValue,
+                randomIndex;
 
             // While there remain elements to shuffle...
             while (0 !== currentIndex) {
@@ -97,7 +96,7 @@
             }
 
             return array;
-        }
+        };
 
         Utils.roundToNearest = function (x, m) {
             if (isNaN(x)) {
